@@ -1,11 +1,19 @@
 from fastapi import FastAPI, Request
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, JSONResponse
 from twilio.twiml.messaging_response import MessagingResponse
 import time
+
 app = FastAPI()
 
 # Mock database for tracking user sessions
 user_sessions = {}
+
+@app.get("/")
+async def welcome():
+    """
+    Welcome route with a funny message and an emoji.
+    """
+    return JSONResponse(content={"web": "Welcome! We're coding away like 🐒 on caffeine!"})
 
 @app.post("/webhook")
 async def whatsapp_webhook(request: Request):
@@ -33,18 +41,13 @@ async def whatsapp_webhook(request: Request):
         response.message(
             f"👨🏿‍🎤 Here admins will check the registration_number and initiate an STK to user..."
         )
-        time.sleep(4)
         response.message(
             "💵 Payment processing... An STK push has been sent to your number for approval. "
             "🕵🏿‍♀️ Please enter your password to proceed with the payment."
-           
         )
-        response.message( "👌🏿 Type anything and send to simulate the payment")
+        response.message("👌🏿 Type anything and send to simulate the payment")
         user_sessions[from_number]["state"] = "awaiting_password"  # Move to next state
     elif user_sessions[from_number]["state"] == "awaiting_password":
-        response.message(
-            "🔒 setup Daraja ApI here to send the callback url status here(success✅ or fail ⛔️) and respond with the status"
-        )
         # Handle the password entry (simulate successful payment)
         user_sessions[from_number]["password"] = body
         user_sessions[from_number]["state"] = "completed"
@@ -55,10 +58,8 @@ async def whatsapp_webhook(request: Request):
             "- Cholesterol: Elevated ❤️‍🔥\n"
             "\nThank you for using our service!"
         )
-        response.message(
-            
-            "😵 There was an error with your payment. Please try again ⛔️"
-        )
+        response.message("😵 There was an error with your payment. Please try again ⛔️")
+        
         # End session
         del user_sessions[from_number]
     else:
