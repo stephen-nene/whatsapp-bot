@@ -4,9 +4,9 @@
 # cd FastAPI || { echo "Directory FastAPI not found."; exit 1; }
 
 # Check if virtual environment exists and activate it
-if [ -d "venv" ]; then
+if [ -d "src/venv" ]; then
     echo "Activating virtual environment..."
-    source venv/bin/activate
+    source src/venv/bin/activate
 else
     echo "Virtual environment not found. Please set it up first."
     exit 1
@@ -18,4 +18,4 @@ fi
 
 # Start the development server
 echo "Starting development server..."
-uvicorn main:app --reload --host 0.0.0.0 --port 900
+uvicorn src.main:app --reload --host 0.0.0.0 --port 9000 

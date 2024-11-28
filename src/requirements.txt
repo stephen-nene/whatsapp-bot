@@ -5,3 +5,4 @@ aiofiles
 python-dotenv
 httpx
 python-multipart
+pyngrok

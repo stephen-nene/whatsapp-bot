@@ -1,0 +1,8 @@
+{
+    "name": "Alice Johnson",
+    "age": 28,
+    "email": "alice@example.com",
+    "phone": "+254712345678",
+    "address": "123 Elm Street, Nairobi",
+    "membership_level": "Gold"
+}
