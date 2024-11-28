@@ -12,7 +12,7 @@ logger = logging.getLogger()
 logger.setLevel(logging.INFO)  # Global log level
 
 # File handler for writing logs to a file
-file_handler = logging.FileHandler("log/requests.log")
+file_handler = logging.FileHandler("../log/requests.log")
 file_handler.setLevel(logging.INFO)
 
 # Formatter to add timestamps to log messages
@@ -25,7 +25,7 @@ logger.addHandler(file_handler)
 app = FastAPI()
 
 # Mount the '/files' route to serve static files from 'src/files' directory
-app.mount("/files", StaticFiles(directory="files"), name="files")
+app.mount("/files", StaticFiles(directory="../files"), name="files")
 
 @app.get("/")
 async def welcome():
