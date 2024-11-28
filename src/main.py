@@ -1,9 +1,10 @@
+from bot_logic import handle_message
 from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from twilio.twiml.messaging_response import MessagingResponse
 
-from src.bot_logic import handle_message
+
 
 # Create logger
 import logging
@@ -11,7 +12,7 @@ logger = logging.getLogger()
 logger.setLevel(logging.INFO)  # Global log level
 
 # File handler for writing logs to a file
-file_handler = logging.FileHandler("src/log/requests.log")
+file_handler = logging.FileHandler("log/requests.log")
 file_handler.setLevel(logging.INFO)
 
 # Formatter to add timestamps to log messages
@@ -24,7 +25,7 @@ logger.addHandler(file_handler)
 app = FastAPI()
 
 # Mount the '/files' route to serve static files from 'src/files' directory
-app.mount("/files", StaticFiles(directory="src/files"), name="files")
+app.mount("/files", StaticFiles(directory="files"), name="files")
 
 @app.get("/")
 async def welcome():

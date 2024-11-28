@@ -1,7 +1,7 @@
 from twilio.twiml.messaging_response import MessagingResponse
 from twilio.base.exceptions import TwilioRestException
-from src.mpesa_integration import simulate_mpesa_stk_push
-from src.models import user_sessions, registered_users
+from mpesa_integration import simulate_mpesa_stk_push
+from models import user_sessions, registered_users
 from typing import Dict
 
 
