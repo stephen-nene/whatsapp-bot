@@ -21,9 +21,9 @@ def setup_logger(name="app", log_level=logging.INFO, log_dir=None):
     logger.addHandler(file_handler)
 
     # Console handler (fallback for environments like Render)
-    console_handler = logging.StreamHandler()
-    console_handler.setFormatter(logging.Formatter("%(asctime)s - %(levelname)s - %(message)s"))
-    logger.addHandler(console_handler)
+    # console_handler = logging.StreamHandler()
+    # console_handler.setFormatter(logging.Formatter("%(asctime)s - %(levelname)s - %(message)s"))
+    # logger.addHandler(console_handler)
 
     logger.info(f"Logger initialized for {name}. Logs saved at {log_file}")
     return logger

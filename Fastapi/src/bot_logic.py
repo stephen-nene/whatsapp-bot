@@ -4,16 +4,12 @@ from mpesa_integration import simulate_mpesa_stk_push
 from models import user_sessions, registered_users
 from typing import Dict
 
-
-
 # Function to check registration number
 def check_registration_number(reg_number: str):
     user_info = registered_users.get(reg_number.upper())  # Normalize case
     if user_info:
         return True, user_info
     return False, None
-
-
 
 async def handle_message(from_number: str, body: str) -> MessagingResponse:
     response = MessagingResponse()
@@ -32,7 +28,7 @@ async def handle_message(from_number: str, body: str) -> MessagingResponse:
                 user_sessions[from_number]["state"] = "processing_payment"
                 user_sessions[from_number]["user_info"] = user_info
                 response.message(f"✅ Registration number {reg_number} found for {user_info['name']}.\nProceeding to payment...")
-                response.message("💵 Payment processing... An STK push has been sent to your number for approval. Please enter your password to proceed with the payment.")
+                response.message(f"💵 A payment request for Ksh 100 has been sent to your phone {from_number}. Please approve the transaction by entering your mpesa pin to complete the payment.")
                 
                 # Simulate M-Pesa STK push
                 mpesa_response = simulate_mpesa_stk_push(from_number, 100)  # Assume Ksh 100 payment
@@ -53,12 +49,6 @@ async def handle_message(from_number: str, body: str) -> MessagingResponse:
                             f"- Email: {user_info.get('email')}\n"
                             f"- Phone: {user_info.get('phone')}\n"
                             f"- Membership Level: {user_info.get('membership_level')}")
-
-            # Generate the user info file and get the media URL
-            # media_url = generate_user_info_file(user_info, f"user_info_whatsapp_{from_number}")
-
-            # Send the media file via Twilio webhook response
-            # response.message("📄 Here is your user info:", media_url=media_url)
 
             # Clear session after successful transaction
             del user_sessions[from_number]
