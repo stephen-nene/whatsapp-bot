@@ -1,3 +1,4 @@
+import logger from '../utils/logger.js';
 // List of Ruby on Rails jokes
 const jokes = [
     'Why do Ruby on Rails developers never go broke? Because they always get a good return on investment (RoR)!',
@@ -6,12 +7,12 @@ const jokes = [
     'Why don’t Ruby on Rails developers ever have arguments? Because they just *resolve* them!',
     'Why do Ruby on Rails developers make terrible secret agents? Because they’re always caught in the *MVC*!',
   ];
-  
-  export const getWelcomeMessage = (req, res) => {
-    const randomJoke = jokes[Math.floor(Math.random() * jokes.length)];  // Randomly pick a joke
-    res.json({
-      message: 'Welcome to the API!',
-      joke: randomJoke
-    });
-  };
-  
+
+export const getWelcomeMessage = (req, res) => {
+  const randomJoke = jokes[Math.floor(Math.random() * jokes.length)];
+  logger.info(`GET / - Responding with joke: ${randomJoke}`);
+  res.json({
+    message: 'Welcome to the API!',
+    joke: randomJoke,
+  });
+};

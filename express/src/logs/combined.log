@@ -1,0 +1,17 @@
+2024-11-29T16:56:33.194Z info: M-Pesa Callback Received
+2024-11-29T16:56:33.194Z error: Invalid initiator information
+2024-11-29T16:56:33.203Z info: ::ffff:127.0.0.1 - - [29/Nov/2024:16:56:33 +0000] "POST /api/mpesa/callback HTTP/1.1" 200 114 "-" "Apache-HttpClient/4.5.5 (Java/1.8.0_251)"
+2024-11-29T16:58:16.122Z info: Server is running at http://localhost:3000
+2024-11-29T16:58:35.856Z info: M-Pesa Callback Received
+2024-11-29T16:58:35.856Z warn: User canceled the request
+2024-11-29T16:58:35.864Z info: ::ffff:127.0.0.1 - - [29/Nov/2024:16:58:35 +0000] "POST /api/mpesa/callback HTTP/1.1" 200 105 "-" "Apache-HttpClient/4.5.5 (Java/1.8.0_251)"
+2024-11-29T17:00:20.178Z error: POST /api/mpesa/callback - Expected property name or '}' in JSON at position 4 (line 2 column 3)
+2024-11-29T17:00:36.296Z error: POST /api/mpesa/callback - Expected property name or '}' in JSON at position 4 (line 2 column 3)
+2024-11-29T17:00:48.635Z info: Server is running at http://localhost:3000
+2024-11-29T17:00:54.381Z error: POST /api/mpesa/callback - Expected property name or '}' in JSON at position 4 (line 2 column 3)
+2024-11-29T17:01:01.965Z error: Invalid callback payload received
+2024-11-29T17:01:01.969Z info: ::ffff:127.0.0.1 - - [29/Nov/2024:17:01:01 +0000] "POST /api/mpesa/callback HTTP/1.1" 400 45 "-" "Thunder Client (https://www.thunderclient.com)"
+2024-11-29T17:01:49.931Z error: POST /api/mpesa/callback - Unexpected token ''', ..."questID": '9434-45b2"... is not valid JSON
+2024-11-29T17:02:17.264Z info: M-Pesa Callback Received
+2024-11-29T17:02:17.264Z warn: User canceled the request
+2024-11-29T17:02:17.266Z info: ::ffff:127.0.0.1 - - [29/Nov/2024:17:02:17 +0000] "POST /api/mpesa/callback HTTP/1.1" 200 105 "-" "Thunder Client (https://www.thunderclient.com)"

@@ -1,0 +1,6 @@
+2024-11-29T16:56:33.194Z error: Invalid initiator information
+2024-11-29T17:00:20.178Z error: POST /api/mpesa/callback - Expected property name or '}' in JSON at position 4 (line 2 column 3)
+2024-11-29T17:00:36.296Z error: POST /api/mpesa/callback - Expected property name or '}' in JSON at position 4 (line 2 column 3)
+2024-11-29T17:00:54.381Z error: POST /api/mpesa/callback - Expected property name or '}' in JSON at position 4 (line 2 column 3)
+2024-11-29T17:01:01.965Z error: Invalid callback payload received
+2024-11-29T17:01:49.931Z error: POST /api/mpesa/callback - Unexpected token ''', ..."questID": '9434-45b2"... is not valid JSON
