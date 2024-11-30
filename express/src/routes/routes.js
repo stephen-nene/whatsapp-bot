@@ -12,7 +12,6 @@ router.post('/twilio/webhook', handleIncomingMessage);
 router.post('/mpesa/stkpush', initiateSTKPush);
 router.post('/mpesa/callback', handleCallback);
 
-// Default route to return a welcome message with a random Ruby joke
 router.get('/', getWelcomeMessage);
 
 export default router;
