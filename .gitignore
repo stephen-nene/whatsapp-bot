@@ -1,1 +1,7 @@
-express/src/logs/combined.log
+node_modules
+.env
+# express/src/logs/combined.log
+# express/src/logs/*
+logs
+
+package-lock.json
