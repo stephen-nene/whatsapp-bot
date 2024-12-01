@@ -37,6 +37,6 @@ app.use((err, req, res, next) => {
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   const host = `http://localhost:${PORT}`; // Full URL with localhost
-  console.log(`Starting server on port ${PORT}`);
+  console.log(`Starting server on http://localhost:${PORT}`);
   // logger.info(`Server is running at ${host}`)/;
 });

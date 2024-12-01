@@ -1,7 +1,8 @@
 import axios from "axios";
-import { getMpesaToken } from "../utils/mpesaHelper.js";
+import { getMpesaToken } from "../utils/helper.js";
 import logger from "../utils/logger.js";
 
+// function to call the mpesa STK push service
 export const initiateSTKPushRequest = async ({ phone, amount }) => {
   const token = await getMpesaToken();
   const timestamp = new Date()
@@ -23,7 +24,7 @@ export const initiateSTKPushRequest = async ({ phone, amount }) => {
     PartyB: process.env.MPESA_SHORTCODE,
     PhoneNumber: phone,
     CallBackURL: process.env.CALLBACK_URL,
-    AccountReference: "Test",
+    AccountReference: "Test result ",
     TransactionDesc: "Test Payment",
   };
 // console.log(data);
@@ -33,7 +34,7 @@ export const initiateSTKPushRequest = async ({ phone, amount }) => {
       data,
       { headers: { Authorization: `Bearer ${token}` } }
     );
-    // console.log(response);
+    // console.log("Mpesa STK push response: ",response.data);
     return response.data;
   } catch (error) {
     console.error("error here amnzeee", error.response.data);
@@ -41,12 +42,13 @@ export const initiateSTKPushRequest = async ({ phone, amount }) => {
   }
 };
 
+// endpoint for post STK mpesa request
 export const initiateSTKPush = async (req, res) => {
   const { phone, amount } = req.body;
 
   try {
     const response = await initiateSTKPushRequest({ phone, amount });
-    console.log(response);
+
     res.json(response);
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -54,7 +56,7 @@ export const initiateSTKPush = async (req, res) => {
 };
 
 export const handleCallback = (req, res) => {
-  console.log(req.body);
+  console.log("response from callback: ",req.body);
   try {
     const callbackBody = req.body?.Body?.stkCallback;
 
@@ -64,7 +66,7 @@ export const handleCallback = (req, res) => {
         error: "Invalid callback payload received",
       });
     }
-
+// return the usersession.status, message, ResultDesc
     const { MerchantRequestID, CheckoutRequestID, ResultCode, ResultDesc } =
       callbackBody;
 

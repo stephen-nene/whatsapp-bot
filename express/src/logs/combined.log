@@ -1,8 +1,301 @@
-2024-11-30T19:02:46.637Z info: Received message from whatsapp:+254741780970: Hs
-2024-11-30T19:02:46.642Z info: ::ffff:127.0.0.1 - - [30/Nov/2024:19:02:46 +0000] "POST /api/twilio/webhook HTTP/1.1" 200 140 "-" "TwilioProxy/1.1"
-2024-11-30T19:02:51.786Z info: Received message from whatsapp:+254741780970: 12345
-2024-11-30T19:02:51.788Z info: Registration number 12345 found for John Doe. Proceeding to payment.
-2024-11-30T19:02:51.849Z info: ::ffff:127.0.0.1 - - [30/Nov/2024:19:02:51 +0000] "POST /api/twilio/webhook HTTP/1.1" 200 288 "-" "TwilioProxy/1.1"
-2024-11-30T19:03:00.529Z info: M-Pesa Callback Received
-2024-11-30T19:03:00.530Z warn: User canceled the request
-2024-11-30T19:03:00.532Z info: ::ffff:127.0.0.1 - - [30/Nov/2024:19:03:00 +0000] "POST /api/mpesa/callback HTTP/1.1" 200 105 "-" "Apache-HttpClient/4.5.5 (Java/1.8.0_251)"
+2024-12-01T11:18:51.847Z info: Received message from whatsapp:+254741780970: T
+2024-12-01T11:18:51.852Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:11:18:51 +0000] "POST /api/twilio/webhook HTTP/1.1" 200 140 "-" "TwilioProxy/1.1"
+2024-12-01T11:18:53.690Z info: Received Twilio status update
+2024-12-01T11:18:53.690Z info: Message with SID SM7525851d73942be6397d0fa5b81270ae has been sent successfully.
+2024-12-01T11:18:53.697Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:11:18:53 +0000] "POST /api/twilio/status HTTP/1.1" 200 22 "-" "TwilioProxy/1.1"
+2024-12-01T11:18:54.491Z info: Received Twilio status update
+2024-12-01T11:18:54.491Z info: Message with SID SM7525851d73942be6397d0fa5b81270ae was delivered to whatsapp:+254741780970 from whatsapp:+14155238886.
+2024-12-01T11:18:54.497Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:11:18:54 +0000] "POST /api/twilio/status HTTP/1.1" 200 22 "-" "TwilioProxy/1.1"
+2024-12-01T11:19:14.777Z info: Received message from whatsapp:+254741780970: T
+2024-12-01T11:19:14.781Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:11:19:14 +0000] "POST /api/twilio/webhook HTTP/1.1" 200 140 "-" "TwilioProxy/1.1"
+2024-12-01T11:19:16.178Z info: Received Twilio status update
+2024-12-01T11:19:16.179Z info: Message with SID SMd29016d7d9813f4166993f80ee5d00e8 has been sent successfully.
+2024-12-01T11:19:16.182Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:11:19:16 +0000] "POST /api/twilio/status HTTP/1.1" 200 22 "-" "TwilioProxy/1.1"
+2024-12-01T11:19:17.200Z info: Received Twilio status update
+2024-12-01T11:19:17.201Z info: Message with SID SMd29016d7d9813f4166993f80ee5d00e8 was delivered to whatsapp:+254741780970 from whatsapp:+14155238886.
+2024-12-01T11:19:17.203Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:11:19:17 +0000] "POST /api/twilio/status HTTP/1.1" 200 22 "-" "TwilioProxy/1.1"
+2024-12-01T11:30:42.019Z info: Received message from whatsapp:+254741780970: Y
+2024-12-01T11:30:42.056Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:11:30:42 +0000] "POST /api/twilio/webhook HTTP/1.1" 200 140 "-" "TwilioProxy/1.1"
+2024-12-01T11:30:44.211Z info: Received Twilio status update
+2024-12-01T11:30:44.212Z info: Message with SID SM46b959c6b1635a5a6b646b8ac71e3f1a has been sent successfully.
+2024-12-01T11:30:44.793Z info: Received Twilio status update
+2024-12-01T11:30:44.794Z info: Message with SID SM46b959c6b1635a5a6b646b8ac71e3f1a was delivered to whatsapp:+254741780970 from whatsapp:+14155238886.
+2024-12-01T11:30:49.773Z info: Received message from whatsapp:+254741780970: 1234a
+2024-12-01T11:30:49.776Z info: Registration number 1234a found for steve. Proceeding to payment.
+2024-12-01T11:30:49.776Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:11:30:49 +0000] "POST /api/twilio/webhook HTTP/1.1" 200 138 "-" "TwilioProxy/1.1"
+2024-12-01T11:30:52.128Z info: Received Twilio status update
+2024-12-01T11:30:52.129Z info: Message with SID SM1bd4b6ce0f1acc13c56de8dd1609b7c5 was delivered to whatsapp:+254741780970 from whatsapp:+14155238886.
+2024-12-01T11:30:52.693Z info: Received Twilio status update
+2024-12-01T11:30:52.693Z info: Message with SID SM1bd4b6ce0f1acc13c56de8dd1609b7c5 has been sent successfully.
+2024-12-01T11:30:53.782Z info: Requesting Mpesa token...
+2024-12-01T11:30:54.592Z info: Mpesa token received successfully
+2024-12-01T11:30:55.304Z info: Sending Twilio message to whatsapp:+254741780970: ✅ Success. Request accepted for processing
+2024-12-01T11:30:56.024Z info: Twilio message sent successfully
+2024-12-01T11:30:57.962Z info: Received Twilio status update
+2024-12-01T11:30:57.963Z info: Message with SID SM252b3047574c6e126d6e145b3967fafe was delivered to whatsapp:+254741780970 from whatsapp:+14155238886.
+2024-12-01T11:30:58.619Z info: Received Twilio status update
+2024-12-01T11:30:58.619Z info: Message with SID SM252b3047574c6e126d6e145b3967fafe has been sent successfully.
+2024-12-01T11:31:04.215Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:11:31:04 +0000] "POST /api/twilio/status HTTP/1.1" - - "-" "TwilioProxy/1.1"
+2024-12-01T11:31:04.823Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:11:31:04 +0000] "POST /api/twilio/status HTTP/1.1" - - "-" "TwilioProxy/1.1"
+2024-12-01T11:31:12.195Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:11:31:12 +0000] "POST /api/twilio/status HTTP/1.1" - - "-" "TwilioProxy/1.1"
+2024-12-01T11:31:12.707Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:11:31:12 +0000] "POST /api/twilio/status HTTP/1.1" - - "-" "TwilioProxy/1.1"
+2024-12-01T11:31:17.930Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:11:31:17 +0000] "POST /api/twilio/status HTTP/1.1" - - "-" "TwilioProxy/1.1"
+2024-12-01T11:31:18.585Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:11:31:18 +0000] "POST /api/twilio/status HTTP/1.1" - - "-" "TwilioProxy/1.1"
+2024-12-01T11:51:02.520Z info: Received message from whatsapp:+254741780970: S
+2024-12-01T11:51:02.543Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:11:51:02 +0000] "POST /api/twilio/webhook HTTP/1.1" 200 140 "-" "TwilioProxy/1.1"
+2024-12-01T11:51:05.179Z info: Received Twilio status update
+2024-12-01T11:51:05.179Z info: Message with SID SMb7f8a7bfa1bb349adc00dceeb8f6e401 was delivered to whatsapp:+254741780970 from whatsapp:+14155238886.
+2024-12-01T11:51:05.182Z info: Received Twilio status update
+2024-12-01T11:51:05.182Z info: Message with SID SMb7f8a7bfa1bb349adc00dceeb8f6e401 has been sent successfully.
+2024-12-01T11:51:15.589Z info: Received message from whatsapp:+254741780970: T
+2024-12-01T11:51:15.590Z warn: Invalid registration number T for user whatsapp:+254741780970.
+2024-12-01T11:51:15.592Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:11:51:15 +0000] "POST /api/twilio/webhook HTTP/1.1" 200 142 "-" "TwilioProxy/1.1"
+2024-12-01T11:51:18.270Z info: Received Twilio status update
+2024-12-01T11:51:18.271Z info: Message with SID SMa32805e7c1cfceb5ba0d21fc646f54cf was delivered to whatsapp:+254741780970 from whatsapp:+14155238886.
+2024-12-01T11:51:18.281Z info: Received Twilio status update
+2024-12-01T11:51:18.281Z info: Message with SID SMa32805e7c1cfceb5ba0d21fc646f54cf has been sent successfully.
+2024-12-01T11:51:25.208Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:11:51:25 +0000] "POST /api/twilio/status HTTP/1.1" - - "-" "TwilioProxy/1.1"
+2024-12-01T11:51:25.208Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:11:51:25 +0000] "POST /api/twilio/status HTTP/1.1" - - "-" "TwilioProxy/1.1"
+2024-12-01T11:51:38.313Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:11:51:38 +0000] "POST /api/twilio/status HTTP/1.1" - - "-" "TwilioProxy/1.1"
+2024-12-01T11:51:38.313Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:11:51:38 +0000] "POST /api/twilio/status HTTP/1.1" - - "-" "TwilioProxy/1.1"
+2024-12-01T11:52:05.153Z info: Received message from whatsapp:+254741780970: T
+2024-12-01T11:52:05.158Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:11:52:05 +0000] "POST /api/twilio/webhook HTTP/1.1" 200 140 "-" "TwilioProxy/1.1"
+2024-12-01T11:52:07.501Z info: Received Twilio status update
+2024-12-01T11:52:07.501Z info: Message with SID SMf3c80f85703de9dfdccd23f0ab8ce217 was delivered to whatsapp:+254741780970 from whatsapp:+14155238886.
+2024-12-01T11:52:08.294Z info: Received Twilio status update
+2024-12-01T11:52:08.294Z info: Message with SID SMf3c80f85703de9dfdccd23f0ab8ce217 has been sent successfully.
+2024-12-01T11:52:27.466Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:11:52:27 +0000] "POST /api/twilio/status HTTP/1.1" - - "-" "TwilioProxy/1.1"
+2024-12-01T11:52:28.591Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:11:52:28 +0000] "POST /api/twilio/status HTTP/1.1" - - "-" "TwilioProxy/1.1"
+2024-12-01T11:52:37.717Z info: Received message from whatsapp:+254741780970: B
+2024-12-01T11:52:37.722Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:11:52:37 +0000] "POST /api/twilio/webhook HTTP/1.1" 200 140 "-" "TwilioProxy/1.1"
+2024-12-01T11:52:40.271Z info: Received Twilio status update
+2024-12-01T11:52:40.272Z info: Message with SID SM51616bddb191d82fda80b8adfd833846 has been sent successfully.
+2024-12-01T11:52:40.276Z info: Received Twilio status update
+2024-12-01T11:52:40.276Z info: Message with SID SM51616bddb191d82fda80b8adfd833846 was delivered to whatsapp:+254741780970 from whatsapp:+14155238886.
+2024-12-01T11:52:45.082Z info: Received message from whatsapp:+254741780970: H
+2024-12-01T11:52:45.083Z warn: Invalid registration number H for user whatsapp:+254741780970.
+2024-12-01T11:52:45.084Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:11:52:45 +0000] "POST /api/twilio/webhook HTTP/1.1" 200 142 "-" "TwilioProxy/1.1"
+2024-12-01T11:52:47.439Z info: Received Twilio status update
+2024-12-01T11:52:47.439Z info: Message with SID SM7079784c4fd5d5f02411662fa5a33d11 was delivered to whatsapp:+254741780970 from whatsapp:+14155238886.
+2024-12-01T11:52:48.029Z info: Received Twilio status update
+2024-12-01T11:52:48.029Z info: Message with SID SM7079784c4fd5d5f02411662fa5a33d11 has been sent successfully.
+2024-12-01T11:53:00.337Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:11:53:00 +0000] "POST /api/twilio/status HTTP/1.1" - - "-" "TwilioProxy/1.1"
+2024-12-01T11:53:00.337Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:11:53:00 +0000] "POST /api/twilio/status HTTP/1.1" - - "-" "TwilioProxy/1.1"
+2024-12-01T11:53:07.388Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:11:53:07 +0000] "POST /api/twilio/status HTTP/1.1" - - "-" "TwilioProxy/1.1"
+2024-12-01T11:53:08.118Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:11:53:08 +0000] "POST /api/twilio/status HTTP/1.1" - - "-" "TwilioProxy/1.1"
+2024-12-01T11:55:37.943Z info: Received message from whatsapp:+254741780970: H
+2024-12-01T11:55:37.948Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:11:55:37 +0000] "POST /api/twilio/webhook HTTP/1.1" 200 140 "-" "TwilioProxy/1.1"
+2024-12-01T11:55:40.393Z info: Received Twilio status update
+2024-12-01T11:55:40.394Z info: Message with SID SMb20b613b6b7f1a6aaa4f458008ff3cb5 was delivered to whatsapp:+254741780970 from whatsapp:+14155238886.
+2024-12-01T11:55:41.130Z info: Received Twilio status update
+2024-12-01T11:55:41.130Z info: Message with SID SMb20b613b6b7f1a6aaa4f458008ff3cb5 has been sent successfully.
+2024-12-01T11:55:41.823Z info: Received message from whatsapp:+254741780970: H
+2024-12-01T11:55:41.824Z warn: Invalid registration number H for user whatsapp:+254741780970.
+2024-12-01T11:55:41.825Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:11:55:41 +0000] "POST /api/twilio/webhook HTTP/1.1" 200 142 "-" "TwilioProxy/1.1"
+2024-12-01T11:55:44.182Z info: Received Twilio status update
+2024-12-01T11:55:44.182Z info: Message with SID SMfc149920452ca72c0abf023973c82bc9 was delivered to whatsapp:+254741780970 from whatsapp:+14155238886.
+2024-12-01T11:55:44.702Z info: Received Twilio status update
+2024-12-01T11:55:44.702Z info: Message with SID SMfc149920452ca72c0abf023973c82bc9 has been sent successfully.
+2024-12-01T11:55:45.816Z info: Received message from whatsapp:+254741780970: H
+2024-12-01T11:55:45.817Z warn: Invalid registration number H for user whatsapp:+254741780970.
+2024-12-01T11:55:45.818Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:11:55:45 +0000] "POST /api/twilio/webhook HTTP/1.1" 200 142 "-" "TwilioProxy/1.1"
+2024-12-01T11:55:48.478Z info: Received Twilio status update
+2024-12-01T11:55:48.479Z info: Message with SID SM1db1b13d52b871b4c378e45c2dd1074e was delivered to whatsapp:+254741780970 from whatsapp:+14155238886.
+2024-12-01T11:55:48.484Z info: Received Twilio status update
+2024-12-01T11:55:48.484Z info: Message with SID SM1db1b13d52b871b4c378e45c2dd1074e has been sent successfully.
+2024-12-01T11:56:28.635Z info: Received message from whatsapp:+254741780970: G
+2024-12-01T11:56:28.640Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:11:56:28 +0000] "POST /api/twilio/webhook HTTP/1.1" 200 140 "-" "TwilioProxy/1.1"
+2024-12-01T11:56:30.480Z info: Received Twilio status update
+2024-12-01T11:56:30.480Z info: Message with SID SM6e695fcab72e14b240d1385a606539bc has been sent successfully.
+2024-12-01T11:56:31.385Z info: Received Twilio status update
+2024-12-01T11:56:31.385Z info: Message with SID SM6e695fcab72e14b240d1385a606539bc was delivered to whatsapp:+254741780970 from whatsapp:+14155238886.
+2024-12-01T11:56:31.692Z info: Received message from whatsapp:+254741780970: B
+2024-12-01T11:56:31.693Z warn: Invalid registration number B for user whatsapp:+254741780970.
+2024-12-01T11:56:31.695Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:11:56:31 +0000] "POST /api/twilio/webhook HTTP/1.1" 200 142 "-" "TwilioProxy/1.1"
+2024-12-01T11:56:34.149Z info: Received Twilio status update
+2024-12-01T11:56:34.149Z info: Message with SID SM2eb064bd8fd2480aa1711f45b1514ae5 was delivered to whatsapp:+254741780970 from whatsapp:+14155238886.
+2024-12-01T11:56:34.513Z info: Received Twilio status update
+2024-12-01T11:56:34.513Z info: Message with SID SM2eb064bd8fd2480aa1711f45b1514ae5 has been sent successfully.
+2024-12-01T11:56:50.533Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:11:56:50 +0000] "POST /api/twilio/status HTTP/1.1" - - "-" "TwilioProxy/1.1"
+2024-12-01T11:56:51.311Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:11:56:51 +0000] "POST /api/twilio/status HTTP/1.1" - - "-" "TwilioProxy/1.1"
+2024-12-01T11:56:54.321Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:11:56:54 +0000] "POST /api/twilio/status HTTP/1.1" - - "-" "TwilioProxy/1.1"
+2024-12-01T11:56:54.628Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:11:56:54 +0000] "POST /api/twilio/status HTTP/1.1" - - "-" "TwilioProxy/1.1"
+2024-12-01T11:57:29.960Z info: Received message from whatsapp:+254741780970: 123
+2024-12-01T11:57:29.961Z warn: Invalid registration number 123 for user whatsapp:+254741780970.
+2024-12-01T11:57:29.963Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:11:57:29 +0000] "POST /api/twilio/webhook HTTP/1.1" 200 144 "-" "TwilioProxy/1.1"
+2024-12-01T11:57:32.385Z info: Received Twilio status update
+2024-12-01T11:57:32.385Z info: Message with SID SM0b870ec1cbbdfe1e15a9bc1ac0cbb90b was delivered to whatsapp:+254741780970 from whatsapp:+14155238886.
+2024-12-01T11:57:32.388Z info: Received Twilio status update
+2024-12-01T11:57:32.389Z info: Message with SID SM0b870ec1cbbdfe1e15a9bc1ac0cbb90b has been sent successfully.
+2024-12-01T11:57:40.898Z info: Received message from whatsapp:+254741780970: I
+2024-12-01T11:57:40.899Z warn: Invalid registration number I for user whatsapp:+254741780970.
+2024-12-01T11:57:40.901Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:11:57:40 +0000] "POST /api/twilio/webhook HTTP/1.1" 200 142 "-" "TwilioProxy/1.1"
+2024-12-01T11:57:43.576Z info: Received Twilio status update
+2024-12-01T11:57:43.576Z info: Message with SID SM913187bfa35b42c610c5c8fa587470d6 has been sent successfully.
+2024-12-01T11:57:43.578Z info: Received Twilio status update
+2024-12-01T11:57:43.578Z info: Message with SID SM913187bfa35b42c610c5c8fa587470d6 was delivered to whatsapp:+254741780970 from whatsapp:+14155238886.
+2024-12-01T11:57:52.484Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:11:57:52 +0000] "POST /api/twilio/status HTTP/1.1" - - "-" "TwilioProxy/1.1"
+2024-12-01T11:57:52.485Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:11:57:52 +0000] "POST /api/twilio/status HTTP/1.1" - - "-" "TwilioProxy/1.1"
+2024-12-01T11:58:03.553Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:11:58:03 +0000] "POST /api/twilio/status HTTP/1.1" - - "-" "TwilioProxy/1.1"
+2024-12-01T11:58:03.553Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:11:58:03 +0000] "POST /api/twilio/status HTTP/1.1" - - "-" "TwilioProxy/1.1"
+2024-12-01T11:58:51.685Z info: Received message from whatsapp:+254741780970: V
+2024-12-01T11:58:51.690Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:11:58:51 +0000] "POST /api/twilio/webhook HTTP/1.1" 200 140 "-" "TwilioProxy/1.1"
+2024-12-01T11:58:55.053Z info: Received Twilio status update
+2024-12-01T11:58:55.054Z info: Message with SID SM3685e1fc8cbe867b113acc06de3fe59e was delivered to whatsapp:+254741780970 from whatsapp:+14155238886.
+2024-12-01T11:58:55.286Z info: Received Twilio status update
+2024-12-01T11:58:55.286Z info: Message with SID SM3685e1fc8cbe867b113acc06de3fe59e has been sent successfully.
+2024-12-01T11:58:56.384Z info: Received message from whatsapp:+254741780970: 1
+2024-12-01T11:58:56.385Z warn: Invalid registration number 1 for user whatsapp:+254741780970.
+2024-12-01T11:58:56.386Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:11:58:56 +0000] "POST /api/twilio/webhook HTTP/1.1" 200 142 "-" "TwilioProxy/1.1"
+2024-12-01T11:58:57.612Z info: Received Twilio status update
+2024-12-01T11:58:57.613Z info: Message with SID SMda4948c07d1dde068455cc2fa2b06149 has been sent successfully.
+2024-12-01T11:58:58.833Z info: Received Twilio status update
+2024-12-01T11:58:58.833Z info: Message with SID SMda4948c07d1dde068455cc2fa2b06149 was delivered to whatsapp:+254741780970 from whatsapp:+14155238886.
+2024-12-01T11:59:02.453Z info: Received message from whatsapp:+254741780970: 1
+2024-12-01T11:59:02.454Z warn: Invalid registration number 1 for user whatsapp:+254741780970.
+2024-12-01T11:59:02.455Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:11:59:02 +0000] "POST /api/twilio/webhook HTTP/1.1" 200 142 "-" "TwilioProxy/1.1"
+2024-12-01T11:59:05.088Z info: Received Twilio status update
+2024-12-01T11:59:05.088Z info: Message with SID SMd2ed19ea0ec2905c8f2d8f915c152994 has been sent successfully.
+2024-12-01T11:59:05.395Z info: Received Twilio status update
+2024-12-01T11:59:05.395Z info: Message with SID SMd2ed19ea0ec2905c8f2d8f915c152994 was delivered to whatsapp:+254741780970 from whatsapp:+14155238886.
+2024-12-01T11:59:14.290Z info: Received message from whatsapp:+254741780970: 1234a
+2024-12-01T11:59:14.291Z info: Registration number 1234a found for steve. Proceeding to payment.
+2024-12-01T11:59:14.292Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:11:59:14 +0000] "POST /api/twilio/webhook HTTP/1.1" 200 138 "-" "TwilioProxy/1.1"
+2024-12-01T11:59:14.918Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:11:59:14 +0000] "POST /api/twilio/status HTTP/1.1" - - "-" "TwilioProxy/1.1"
+2024-12-01T11:59:14.918Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:11:59:14 +0000] "POST /api/twilio/status HTTP/1.1" - - "-" "TwilioProxy/1.1"
+2024-12-01T11:59:16.659Z info: Received Twilio status update
+2024-12-01T11:59:16.659Z info: Message with SID SMa53bdecac04baa895f597d405001b122 was delivered to whatsapp:+254741780970 from whatsapp:+14155238886.
+2024-12-01T11:59:17.171Z info: Received Twilio status update
+2024-12-01T11:59:17.171Z info: Message with SID SMa53bdecac04baa895f597d405001b122 has been sent successfully.
+2024-12-01T11:59:17.578Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:11:59:17 +0000] "POST /api/twilio/status HTTP/1.1" - - "-" "TwilioProxy/1.1"
+2024-12-01T11:59:18.293Z info: Requesting Mpesa token...
+2024-12-01T11:59:18.775Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:11:59:18 +0000] "POST /api/twilio/status HTTP/1.1" - - "-" "TwilioProxy/1.1"
+2024-12-01T11:59:19.075Z info: Mpesa token received successfully
+2024-12-01T11:59:19.629Z info: Sending Twilio message to whatsapp:+254741780970: ✅ Success. Request accepted for processing
+2024-12-01T11:59:21.063Z info: Twilio message sent successfully
+2024-12-01T11:59:23.165Z info: Received Twilio status update
+2024-12-01T11:59:23.165Z info: Message with SID SM59ffab2cbfcf81afb02b1cc8d233ae75 was delivered to whatsapp:+254741780970 from whatsapp:+14155238886.
+2024-12-01T11:59:23.757Z info: Received Twilio status update
+2024-12-01T11:59:23.757Z info: Message with SID SM59ffab2cbfcf81afb02b1cc8d233ae75 has been sent successfully.
+2024-12-01T11:59:25.158Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:11:59:25 +0000] "POST /api/twilio/status HTTP/1.1" - - "-" "TwilioProxy/1.1"
+2024-12-01T11:59:25.159Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:11:59:25 +0000] "POST /api/twilio/status HTTP/1.1" - - "-" "TwilioProxy/1.1"
+2024-12-01T11:59:35.176Z info: Received message from whatsapp:+254741780970: B
+2024-12-01T11:59:35.177Z warn: Unrecognized input from whatsapp:+254741780970. Resetting session.
+2024-12-01T11:59:35.178Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:11:59:35 +0000] "POST /api/twilio/webhook HTTP/1.1" 200 174 "-" "TwilioProxy/1.1"
+2024-12-01T11:59:36.566Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:11:59:36 +0000] "POST /api/twilio/status HTTP/1.1" - - "-" "TwilioProxy/1.1"
+2024-12-01T11:59:36.901Z info: Received Twilio status update
+2024-12-01T11:59:36.902Z info: Message with SID SM549aeed7f9582d9c0dae828dd0824b70 has been sent successfully.
+2024-12-01T11:59:37.240Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:11:59:37 +0000] "POST /api/twilio/status HTTP/1.1" - - "-" "TwilioProxy/1.1"
+2024-12-01T11:59:37.471Z info: Received Twilio status update
+2024-12-01T11:59:37.471Z info: Message with SID SM549aeed7f9582d9c0dae828dd0824b70 was delivered to whatsapp:+254741780970 from whatsapp:+14155238886.
+2024-12-01T11:59:43.282Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:11:59:43 +0000] "POST /api/twilio/status HTTP/1.1" - - "-" "TwilioProxy/1.1"
+2024-12-01T11:59:43.896Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:11:59:43 +0000] "POST /api/twilio/status HTTP/1.1" - - "-" "TwilioProxy/1.1"
+2024-12-01T11:59:57.004Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:11:59:57 +0000] "POST /api/twilio/status HTTP/1.1" - - "-" "TwilioProxy/1.1"
+2024-12-01T11:59:57.515Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:11:59:57 +0000] "POST /api/twilio/status HTTP/1.1" - - "-" "TwilioProxy/1.1"
+2024-12-01T12:04:11.483Z info: Received message from whatsapp:+254741780970: G
+2024-12-01T12:04:11.488Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:12:04:11 +0000] "POST /api/twilio/webhook HTTP/1.1" 200 140 "-" "TwilioProxy/1.1"
+2024-12-01T12:04:14.496Z info: Received Twilio status update
+2024-12-01T12:04:14.497Z info: Message with SID SM73f42585fab2c0d9029c0a33b66cd55d has been sent successfully.
+2024-12-01T12:04:14.640Z info: Received Twilio status update
+2024-12-01T12:04:14.640Z info: Message with SID SM73f42585fab2c0d9029c0a33b66cd55d was delivered to whatsapp:+254741780970 from whatsapp:+14155238886.
+2024-12-01T12:04:15.725Z info: Received message from whatsapp:+254741780970: D
+2024-12-01T12:04:15.725Z warn: Invalid registration number D for user whatsapp:+254741780970.
+2024-12-01T12:04:15.727Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:12:04:15 +0000] "POST /api/twilio/webhook HTTP/1.1" 200 142 "-" "TwilioProxy/1.1"
+2024-12-01T12:04:18.435Z info: Received Twilio status update
+2024-12-01T12:04:18.436Z info: Message with SID SMf7c7c227226377f5d1b7f2c3df84d9ea has been sent successfully.
+2024-12-01T12:04:18.438Z info: Received Twilio status update
+2024-12-01T12:04:18.438Z info: Message with SID SMf7c7c227226377f5d1b7f2c3df84d9ea was delivered to whatsapp:+254741780970 from whatsapp:+14155238886.
+2024-12-01T12:04:34.614Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:12:04:34 +0000] "POST /api/twilio/status HTTP/1.1" - - "-" "TwilioProxy/1.1"
+2024-12-01T12:04:34.615Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:12:04:34 +0000] "POST /api/twilio/status HTTP/1.1" - - "-" "TwilioProxy/1.1"
+2024-12-01T12:04:38.504Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:12:04:38 +0000] "POST /api/twilio/status HTTP/1.1" - - "-" "TwilioProxy/1.1"
+2024-12-01T12:04:38.504Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:12:04:38 +0000] "POST /api/twilio/status HTTP/1.1" - - "-" "TwilioProxy/1.1"
+2024-12-01T12:05:09.750Z info: Received message from whatsapp:+254741780970: F
+2024-12-01T12:05:09.756Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:12:05:09 +0000] "POST /api/twilio/webhook HTTP/1.1" 200 140 "-" "TwilioProxy/1.1"
+2024-12-01T12:05:12.300Z info: Received Twilio status update
+2024-12-01T12:05:12.301Z info: Message with SID SM786137b9faba91d15cca79c41144a72e was delivered to whatsapp:+254741780970 from whatsapp:+14155238886.
+2024-12-01T12:05:12.303Z info: Received Twilio status update
+2024-12-01T12:05:12.304Z info: Message with SID SM786137b9faba91d15cca79c41144a72e has been sent successfully.
+2024-12-01T12:05:12.914Z info: Received message from whatsapp:+254741780970: T
+2024-12-01T12:05:12.916Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:12:05:12 +0000] "POST /api/twilio/webhook HTTP/1.1" 200 140 "-" "TwilioProxy/1.1"
+2024-12-01T12:05:15.046Z info: Received Twilio status update
+2024-12-01T12:05:15.046Z info: Message with SID SM1ba3a5a7d4f330f152854cd46d87954f has been sent successfully.
+2024-12-01T12:05:15.278Z info: Received Twilio status update
+2024-12-01T12:05:15.278Z info: Message with SID SM1ba3a5a7d4f330f152854cd46d87954f was delivered to whatsapp:+254741780970 from whatsapp:+14155238886.
+2024-12-01T12:05:32.574Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:12:05:32 +0000] "POST /api/twilio/status HTTP/1.1" - - "-" "TwilioProxy/1.1"
+2024-12-01T12:05:32.575Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:12:05:32 +0000] "POST /api/twilio/status HTTP/1.1" - - "-" "TwilioProxy/1.1"
+2024-12-01T12:05:35.132Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:12:05:35 +0000] "POST /api/twilio/status HTTP/1.1" - - "-" "TwilioProxy/1.1"
+2024-12-01T12:05:35.183Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:12:05:35 +0000] "POST /api/twilio/status HTTP/1.1" - - "-" "TwilioProxy/1.1"
+2024-12-01T12:07:23.615Z info: Received message from whatsapp:+254741780970 (AccountSid: ACb4bc479609f6ea4b1418f4cc0a3719d6): H
+2024-12-01T12:07:23.628Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:12:07:23 +0000] "POST /api/twilio/webhook HTTP/1.1" 200 140 "-" "TwilioProxy/1.1"
+2024-12-01T12:07:26.796Z info: Received Twilio status update
+2024-12-01T12:07:26.797Z info: Message with SID SM8134be264945c153b254ffd83e96197f was delivered to whatsapp:+254741780970 from whatsapp:+14155238886.
+2024-12-01T12:07:27.216Z info: Received Twilio status update
+2024-12-01T12:07:27.216Z info: Message with SID SM8134be264945c153b254ffd83e96197f has been sent successfully.
+2024-12-01T12:07:27.673Z info: Received message from whatsapp:+254741780970 (AccountSid: ACb4bc479609f6ea4b1418f4cc0a3719d6): T
+2024-12-01T12:07:27.674Z warn: Invalid registration number T for AccountSid ACb4bc479609f6ea4b1418f4cc0a3719d6.
+2024-12-01T12:07:27.676Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:12:07:27 +0000] "POST /api/twilio/webhook HTTP/1.1" 200 142 "-" "TwilioProxy/1.1"
+2024-12-01T12:07:30.131Z info: Received Twilio status update
+2024-12-01T12:07:30.131Z info: Message with SID SMff83d7dfc16a95a67eaf5941efdde949 was delivered to whatsapp:+254741780970 from whatsapp:+14155238886.
+2024-12-01T12:07:30.851Z info: Received Twilio status update
+2024-12-01T12:07:30.851Z info: Message with SID SMff83d7dfc16a95a67eaf5941efdde949 has been sent successfully.
+2024-12-01T12:07:37.112Z info: Received message from whatsapp:+254741780970 (AccountSid: ACb4bc479609f6ea4b1418f4cc0a3719d6): D
+2024-12-01T12:07:37.112Z warn: Invalid registration number D for AccountSid ACb4bc479609f6ea4b1418f4cc0a3719d6.
+2024-12-01T12:07:37.113Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:12:07:37 +0000] "POST /api/twilio/webhook HTTP/1.1" 200 142 "-" "TwilioProxy/1.1"
+2024-12-01T12:07:38.445Z info: Received Twilio status update
+2024-12-01T12:07:38.445Z info: Message with SID SM324aa2708ede146790477a5ac236ce91 has been sent successfully.
+2024-12-01T12:07:39.552Z info: Received Twilio status update
+2024-12-01T12:07:39.552Z info: Message with SID SM324aa2708ede146790477a5ac236ce91 was delivered to whatsapp:+254741780970 from whatsapp:+14155238886.
+2024-12-01T12:07:40.884Z info: Received message from whatsapp:+254741780970 (AccountSid: ACb4bc479609f6ea4b1418f4cc0a3719d6): F
+2024-12-01T12:07:40.884Z warn: Invalid registration number F for AccountSid ACb4bc479609f6ea4b1418f4cc0a3719d6.
+2024-12-01T12:07:40.886Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:12:07:40 +0000] "POST /api/twilio/webhook HTTP/1.1" 200 142 "-" "TwilioProxy/1.1"
+2024-12-01T12:07:42.602Z info: Received Twilio status update
+2024-12-01T12:07:42.602Z info: Message with SID SM7992765ab5e65b4153fd33b427b71f6e has been sent successfully.
+2024-12-01T12:07:43.175Z info: Received Twilio status update
+2024-12-01T12:07:43.175Z info: Message with SID SM7992765ab5e65b4153fd33b427b71f6e was delivered to whatsapp:+254741780970 from whatsapp:+14155238886.
+2024-12-01T12:07:46.813Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:12:07:46 +0000] "POST /api/twilio/status HTTP/1.1" - - "-" "TwilioProxy/1.1"
+2024-12-01T12:07:47.212Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:12:07:47 +0000] "POST /api/twilio/status HTTP/1.1" - - "-" "TwilioProxy/1.1"
+2024-12-01T12:07:50.200Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:12:07:50 +0000] "POST /api/twilio/status HTTP/1.1" - - "-" "TwilioProxy/1.1"
+2024-12-01T12:07:50.916Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:12:07:50 +0000] "POST /api/twilio/status HTTP/1.1" - - "-" "TwilioProxy/1.1"
+2024-12-01T12:08:32.630Z info: Received message from whatsapp:+254741780970 (AccountSid: ACb4bc479609f6ea4b1418f4cc0a3719d6): V
+2024-12-01T12:08:32.646Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:12:08:32 +0000] "POST /api/twilio/webhook HTTP/1.1" 200 140 "-" "TwilioProxy/1.1"
+2024-12-01T12:08:34.852Z info: Received Twilio status update
+2024-12-01T12:08:34.852Z info: Message with SID SMcf4a4f7b2c54c94a1a7fafcc959bb916 was delivered to whatsapp:+254741780970 from whatsapp:+14155238886.
+2024-12-01T12:08:35.205Z info: Received message from whatsapp:+254741780970 (AccountSid: ACb4bc479609f6ea4b1418f4cc0a3719d6): G
+2024-12-01T12:08:35.205Z warn: Invalid registration number G for AccountSid ACb4bc479609f6ea4b1418f4cc0a3719d6.
+2024-12-01T12:08:35.206Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:12:08:35 +0000] "POST /api/twilio/webhook HTTP/1.1" 200 142 "-" "TwilioProxy/1.1"
+2024-12-01T12:08:35.601Z info: Received Twilio status update
+2024-12-01T12:08:35.601Z info: Message with SID SMcf4a4f7b2c54c94a1a7fafcc959bb916 has been sent successfully.
+2024-12-01T12:08:37.045Z info: Received Twilio status update
+2024-12-01T12:08:37.045Z info: Message with SID SMa846d70870516e2ac96260b777e493c5 has been sent successfully.
+2024-12-01T12:08:37.818Z info: Received Twilio status update
+2024-12-01T12:08:37.818Z info: Message with SID SMa846d70870516e2ac96260b777e493c5 was delivered to whatsapp:+254741780970 from whatsapp:+14155238886.
+2024-12-01T12:08:55.020Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:12:08:55 +0000] "POST /api/twilio/status HTTP/1.1" - - "-" "TwilioProxy/1.1"
+2024-12-01T12:08:55.559Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:12:08:55 +0000] "POST /api/twilio/status HTTP/1.1" - - "-" "TwilioProxy/1.1"
+2024-12-01T12:08:57.068Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:12:08:57 +0000] "POST /api/twilio/status HTTP/1.1" - - "-" "TwilioProxy/1.1"
+2024-12-01T12:08:57.887Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:12:08:57 +0000] "POST /api/twilio/status HTTP/1.1" - - "-" "TwilioProxy/1.1"
+2024-12-01T12:22:33.062Z info: Received message from whatsapp:+254741780970: G
+2024-12-01T12:22:33.067Z error: Error processing message from whatsapp:+254741780970: MessageTemplates is not defined
+2024-12-01T12:22:33.072Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:12:22:33 +0000] "POST /api/twilio/webhook HTTP/1.1" 200 49 "-" "TwilioProxy/1.1"
+2024-12-01T12:25:00.876Z info: Received message from whatsapp:+254741780970: G
+2024-12-01T12:25:00.882Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:12:25:00 +0000] "POST /api/twilio/webhook HTTP/1.1" 200 140 "-" "TwilioProxy/1.1"
+2024-12-01T12:25:03.527Z info: Received Twilio status update
+2024-12-01T12:25:03.528Z info: Message with SID SMb24958449a4e63fdbe68ebdab354c24b has been sent successfully.
+2024-12-01T12:25:03.834Z info: Received Twilio status update
+2024-12-01T12:25:03.834Z info: Message with SID SMb24958449a4e63fdbe68ebdab354c24b was delivered to whatsapp:+254741780970 from whatsapp:+14155238886.
+2024-12-01T12:25:21.512Z info: Received message from whatsapp:+254741780970: G
+2024-12-01T12:25:21.514Z error: Error processing message from whatsapp:+254741780970: handleRegistrationState is not defined
+2024-12-01T12:25:21.516Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:12:25:21 +0000] "POST /api/twilio/webhook HTTP/1.1" 200 49 "-" "TwilioProxy/1.1"
+2024-12-01T12:25:23.596Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:12:25:23 +0000] "POST /api/twilio/status HTTP/1.1" - - "-" "TwilioProxy/1.1"
+2024-12-01T12:25:23.596Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:12:25:23 +0000] "POST /api/twilio/status HTTP/1.1" - - "-" "TwilioProxy/1.1"
+2024-12-01T12:31:14.133Z info: Received message from whatsapp:+254741780970
+2024-12-01T12:31:14.146Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:12:31:14 +0000] "POST /api/twilio/webhook HTTP/1.1" 200 69 "-" "TwilioProxy/1.1"
+2024-12-01T12:31:21.183Z info: Received message from whatsapp:+254741780970
+2024-12-01T12:31:21.186Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:12:31:21 +0000] "POST /api/twilio/webhook HTTP/1.1" 200 69 "-" "TwilioProxy/1.1"
+2024-12-01T12:31:51.091Z info: Received message from whatsapp:+254741780970: G
+2024-12-01T12:31:51.098Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:12:31:51 +0000] "POST /api/twilio/webhook HTTP/1.1" 200 140 "-" "TwilioProxy/1.1"
+2024-12-01T12:31:52.502Z info: Received Twilio status update
+2024-12-01T12:31:52.502Z info: Message with SID SMf1514dc161e77c781c58e2bf77b9ef36 has been sent successfully.
+2024-12-01T12:31:53.557Z info: Received Twilio status update
+2024-12-01T12:31:53.557Z info: Message with SID SMf1514dc161e77c781c58e2bf77b9ef36 was delivered to whatsapp:+254741780970 from whatsapp:+14155238886.
+2024-12-01T12:32:12.507Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:12:32:12 +0000] "POST /api/twilio/status HTTP/1.1" - - "-" "TwilioProxy/1.1"
+2024-12-01T12:32:13.710Z info: ::ffff:127.0.0.1 - - [01/Dec/2024:12:32:13 +0000] "POST /api/twilio/status HTTP/1.1" - - "-" "TwilioProxy/1.1"
