@@ -1,7 +1,8 @@
 import axios from "axios";
 import { getMpesaToken } from "../utils/helper.js";
 import logger from "../utils/logger.js";
-
+import { userSessions } from "../utils/sessionUtils.js";
+import { sendTwilioMessage } from "../utils/helper.js";
 // function to call the mpesa STK push service
 export const initiateSTKPushRequest = async ({ phone, amount }) => {
   const token = await getMpesaToken();
@@ -10,7 +11,7 @@ export const initiateSTKPushRequest = async ({ phone, amount }) => {
     .replace(/[-:T.Z]/g, "")
     .slice(0, 14);
 
-    const password = Buffer.from(
+  const password = Buffer.from(
     `${process.env.MPESA_SHORTCODE}${process.env.MPESA_PASSKEY}${timestamp}`
   ).toString("base64");
 
@@ -27,7 +28,7 @@ export const initiateSTKPushRequest = async ({ phone, amount }) => {
     AccountReference: "Test result ",
     TransactionDesc: "Test Payment",
   };
-// console.log(data);
+  // console.log(data);
   try {
     const response = await axios.post(
       "https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest",
@@ -56,7 +57,7 @@ export const initiateSTKPush = async (req, res) => {
 };
 
 export const handleCallback = (req, res) => {
-  console.log("response from callback: ",req.body);
+  // console.log("Response from callback: ", req.body?.Body.stkCallback);
   try {
     const callbackBody = req.body?.Body?.stkCallback;
 
@@ -66,9 +67,9 @@ export const handleCallback = (req, res) => {
         error: "Invalid callback payload received",
       });
     }
-// return the usersession.status, message, ResultDesc
-    const { MerchantRequestID, CheckoutRequestID, ResultCode, ResultDesc } =
-      callbackBody;
+    
+    // Destructure the relevant data from the callback
+    const { MerchantRequestID, CheckoutRequestID, ResultCode, ResultDesc } = callbackBody;
 
     logger.info("M-Pesa Callback Received", {
       MerchantRequestID,
@@ -77,52 +78,57 @@ export const handleCallback = (req, res) => {
       ResultDesc,
     });
 
+    // Find the session matching the CheckoutRequestID
+    const session = Object.values(userSessions).find(
+      (session) => session.checkout_id === CheckoutRequestID
+    );
+
+    if (!session) {
+      logger.warn("No matching user session found for this callback", {
+        CheckoutRequestID,
+      });
+      return res.status(404).json({ error: "User session not found" });
+    }
+
+    // console.log("User session found", session);
+
+    // Update session state based on payment result
+    session.state = ResultCode === "0" ? "payment_done" : "payment_done";
+    // session.state = "payment_done"
+
     // Handle specific result codes
+    let message = '';
     switch (ResultCode) {
-      case 0: // Success
+      case "0": // Success
         logger.info("Transaction successful", {
           MerchantRequestID,
           CheckoutRequestID,
         });
-        res.status(200).json({
-          message: "Transaction processed successfully",
-          MerchantRequestID,
-          CheckoutRequestID,
-        });
+        message = `✅ Payment successful! Thank you, ${session.user_info.name}.\nHere are your details:\n- Name: ${session.user_info.name}\n- Email: ${session.user_info.email}\n- Phone: ${session.user_info.phone}\n- Membership Level: ${session.user_info.membership_level}`;
         break;
 
-      case 1032: // Request canceled by user
+      case "1032": // Request canceled by user
         logger.warn("User canceled the request", {
           MerchantRequestID,
           CheckoutRequestID,
         });
-        res.status(200).json({
-          error: "User canceled the transaction",
-          suggestion: "Inform the user to retry or check their actions.",
-        });
+        message = "❌ Transaction canceled by you. Please try again if you wish.";
         break;
 
-      case 1037: // User cannot be reached
+      case "1037": // User cannot be reached
         logger.warn("DS timeout: User cannot be reached", {
           MerchantRequestID,
           CheckoutRequestID,
         });
-        res.status(200).json({
-          error: "User cannot be reached. Retry later.",
-          suggestion: "Ensure the target SIM is active and reachable.",
-        });
+        message = "❌ We couldn't reach your phone. Please ensure your number is correct and try again later.";
         break;
 
-      case 2001: // Invalid initiator information
+      case "2001": // Invalid initiator information
         logger.error("Invalid initiator information", {
           MerchantRequestID,
           CheckoutRequestID,
         });
-        res.status(200).json({
-          error: "Invalid initiator information.",
-          suggestion:
-            "Verify credentials or ask user to input the correct PIN.",
-        });
+        message = "❌ Invalid payment details. Please check your information and try again.";
         break;
 
       default:
@@ -130,19 +136,34 @@ export const handleCallback = (req, res) => {
           ResultCode,
           ResultDesc,
         });
-        res.status(500).json({
-          error: `An error occurred: ${ResultDesc}`,
-          ResultCode,
-        });
+        message = `❓ An error occurred: ${ResultDesc}. Please try again later.`;
         break;
     }
+
+    // Send a WhatsApp message to the user with the relevant message
+    if (session.wa_info?.WaId) {
+      sendTwilioMessage(session.wa_info.From, message)
+        .then(() => {
+          logger.info("Message sent successfully to user", { WaId: session.wa_info.WaId });
+        })
+        .catch((error) => {
+          logger.error("Error sending message to user", { error: error.message });
+        });
+    } else {
+      logger.warn("No WhatsApp number found for user session");
+    }
+
+    // Respond with the appropriate status and message
+    // res.status(200).json({
+    //   message: `Transaction processed successfully with ResultCode ${ResultCode}`,
+    //   MerchantRequestID,
+    //   CheckoutRequestID,
+    // });
   } catch (error) {
     logger.error("Error handling M-Pesa Callback", {
       error: error.message,
       stack: error.stack,
     });
-    res
-      .status(500)
-      .send("An unexpected error occurred while processing the callback.");
+    res.status(500).send("An unexpected error occurred while processing the callback.");
   }
 };

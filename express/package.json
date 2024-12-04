@@ -1,5 +1,5 @@
 {
-  "name": "whatsa_bobt",
+  "name": "whatsapp_bot",
   "version": "1.0.0",
   "type": "module",
   "main": "server.js",

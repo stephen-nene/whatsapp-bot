@@ -2,10 +2,7 @@ import pkg from "twilio";
 const { twiml } = pkg;
 
 import logger from "../utils/logger.js";
-import {
-  initiateSTKPushRequest,
-  handleCallback,
-} from "../controllers/mpesaController.js";
+import { initiateSTKPushRequest, handleCallback } from "./mpesaController.js";
 
 import { sendTwilioMessage } from "../utils/helper.js";
 import {
@@ -14,167 +11,297 @@ import {
   cleanPhoneNumber,
   SessionStates,
   SessionManager,
-  MessageTemplates
+  MessageTemplates,
 } from "../utils/sessionUtils.js";
 
-
 export const handleIncomingMessage = async (req, res) => {
-  const {AccountSid: accountSid, From: fromNumber, Body: body } = req.body;
-  console.log("All sessions:", userSessions);
-  console.log("Session for this account:", userSessions[accountSid]);
+  const { AccountSid: accountSid, From: fromNumber, Body: body } = req.body;
+  // console.log("All sessions:", userSessions);
 
   try {
     logger.info(`Received message from ${fromNumber}: ${body.trim()}`);
-    
-    const response = await processUserMessage(accountSid, body.trim());
-    
-    res.type("text/xml").send(response.toString());
+
+    await processUserMessage(req.body, body.trim());
   } catch (error) {
+    console.error(error);
     handleMessageProcessingError(fromNumber, error, res);
   }
 };
 
+async function processUserMessage(reqbody, body) {
+  const currentSession = userSessions[reqbody?.AccountSid];
 
-async function processUserMessage(accountSid, body) {
-  const twimlResponse = new twiml.MessagingResponse();
-  
-  const currentSession = userSessions[accountSid];
-  
   if (!currentSession) {
-    return handleNewSession(accountSid, twimlResponse);
+    return handleNewSession(reqbody);
   }
-  
+
   switch (currentSession.state) {
     case SessionStates.AWAITING_REGISTRATION:
-      return handleRegistrationState(accountSid, body, twimlResponse);
-    
+      // console.log("Curtrent Session", currentSession || null);
+      return handleRegistrationState(reqbody);
+
     case SessionStates.PROCESSING_PAYMENT:
-      return handlePaymentProcessing(accountSid, body, twimlResponse);
-    
+      return handlePaymentProcessing(reqbody);
+
     case SessionStates.PAYMENT_DONE:
-      return handlePaymentDone(accountSid, body, twimlResponse);
-    
+      return handlePaymentDone(reqbody?.AccountSid);
+
     default:
-      return handleUnrecognizedState(accountSid, twimlResponse);
+      return handleUnrecognizedState(reqbody?.AccountSid);
   }
 }
 
-function handleNewSession(fromNumber, twimlResponse) {
-  SessionManager.initializeSession(userSessions, fromNumber);
-  twimlResponse.message(MessageTemplates.WELCOME);
-  return twimlResponse;
+async function handleNewSession(reqbody) {
+  await sendTwilioMessage(
+    reqbody?.From,
+    MessageTemplates.WELCOME(reqbody?.ProfileName)
+  );
+  SessionManager.initializeSession(userSessions, reqbody?.AccountSid);
 }
 
-function handleRegistrationState(fromNumber, twimlResponse) {
-  SessionManager.initializeSession(userSessions, fromNumber);
-  twimlResponse.message(MessageTemplates.WELCOME);
-  return twimlResponse;
-}
+function handleRegistrationState(reqbody) {
+  const regNumber = reqbody.Body.trim();
+  const fromNumber = reqbody.From;
+  const accountSid = reqbody.AccountSid;
+  const [isValid, userInfo] = checkRegistrationNumber(regNumber);
 
-export const handleIncomingMessage2 = async (req, res) => {
-  const { AccountSid: accountSid, From: fromNumber, Body: body } = req.body;
+  if (isValid) {
+    userSessions[accountSid] = {
+      state: SessionStates.PROCESSING_PAYMENT,
+      registration_number: regNumber,
+      user_info: userInfo,
+      wa_info: reqbody,
+    };
 
-
-  const response = new twiml.MessagingResponse();
-
-  try {
-    logger.info(
-      `Received message from ${fromNumber} (AccountSid: ${accountSid}): ${body.trim()}`
+    sendTwilioMessage(
+      fromNumber,
+      MessageTemplates.PAYMENT_PROCESSING(userInfo.name)
     );
 
-    if (!userSessions[accountSid]) {
-      userSessions[accountSid] = { state: "awaiting_registration" };
-      response.message(
-        `👋 Welcome! ${req?.body?.ProfileName} Please send your registration number to proceed.`
-      );
-    } else if (userSessions[accountSid].state === "awaiting_registration") {
-      const regNumber = body.trim();
-      userSessions[accountSid].registration_number = regNumber;
+    handlePaymentProcessing(reqbody);
 
-      const [isValid, userInfo] = checkRegistrationNumber(regNumber);
-      if (isValid) {
-        userSessions[accountSid].state = "processing_payment";
-        userSessions[accountSid].user_info = userInfo;
+    return {
+      status: "success",
+      message: `User ${userInfo.name} moved to processing payment state.`,
+    };
+  } else {
+    userSessions[accountSid].state = SessionStates.AWAITING_REGISTRATION;
+    sendTwilioMessage(
+      fromNumber,
+      MessageTemplates.INVALID_REGISTRATION(regNumber)
+    );
 
-        response.message(
-          `🔓 Welcome back ${userInfo.name}.\n⌛Processing your 💸 payment ...`
+    return {
+      status: "error",
+      message: "Invalid registration number. Prompted user to retry.",
+    };
+  }
+}
+
+function handlePaymentProcessing(reqbody) {
+  const accountSid = reqbody.AccountSid; // Extract session ID
+  const fromNumber = reqbody.From; // Extract user's phone number
+
+  // Retrieve the current session
+  const currentSession = userSessions[accountSid];
+  if (
+    !currentSession ||
+    currentSession.state !== SessionStates.PROCESSING_PAYMENT
+  ) {
+    console.warn(`Invalid session state for AccountSid ${accountSid}`);
+    return {
+      status: "error",
+      message: "Invalid session state. Unable to process payment.",
+    };
+  }
+
+  // Extract user info from the session
+  const userInfo = currentSession.user_info;
+
+  // Simulate initiating an STK push for payment
+  // console.log(`Initiating payment for ${userInfo.name} (${fromNumber})`);
+
+  setTimeout(async () => {
+    try {
+      const paymentResponse = await initiateSTKPushRequest({
+        phone: cleanPhoneNumber(fromNumber),
+        amount: 1, // Replace with your dynamic amount logic if needed
+      });
+
+      if (paymentResponse?.ResponseCode === "0") {
+        currentSession.mpesa_id = paymentResponse?.MerchantRequestID;
+        currentSession.checkout_id = paymentResponse?.CheckoutRequestID;
+
+        sendTwilioMessage(
+          fromNumber,
+          `✅ ${paymentResponse.ResponseDescription}. Please reply with a password to complete your transaction.`
         );
-        logger.info(
-          `Registration number ${regNumber} found for ${userInfo.name}. Proceeding to payment.`
-        );
-        setTimeout(async () => {
-          const moneyres = await initiateSTKPushRequest({
-            phone: cleanPhoneNumber(fromNumber),
-            amount: 1000,
-          });
-          if (moneyres?.ResponseCode === "0") {
-            sendTwilioMessage(fromNumber, `✅ ${moneyres.ResponseDescription}`);
-          }
-        }, 4000);
+// currentSession.state = SessionStates.PAYMENT_DONE
+
+        // console.info(
+        //   `Payment initiated successfully for ${userInfo.name} (${fromNumber}).`
+        // );
       } else {
-        response.message(
-          `❌ Registration number ${regNumber} not found. Please check and try again.`
+        // Payment initiation failed
+        sendTwilioMessage(
+          fromNumber,
+          "❌ Payment initiation failed. Please try again later."
         );
-        userSessions[accountSid].state = "awaiting_registration";
 
-        logger.warn(
-          `Invalid registration number ${regNumber} for AccountSid ${accountSid}.`
+        console.error(
+          `Payment initiation failed for ${userInfo.name} (${fromNumber}).`
         );
       }
-    } else if (userSessions[accountSid].state === "awaiting_password") {
-      userSessions[accountSid].password = body.trim();
-      userSessions[accountSid].state = "completed";
+    } catch (error) {
+      console.error("Error initiating payment:", error);
 
-      const userInfo = userSessions[accountSid].user_info || {};
-      response.message(
-        `✅ Payment successful! Thank you, ${userInfo.name}.\nHere are your details:\n` +
-          `- Name: ${userInfo.name}\n- Email: ${userInfo.email}\n- Phone: ${userInfo.phone}\n- Membership Level: ${userInfo.membership_level}`
-      );
-
-      logger.info(
-        `Payment successful for AccountSid ${accountSid}. Transaction complete.`
-      );
-
-      delete userSessions[accountSid];
-    } else {
-      response.message(
-        "❓ I'm sorry, I didn't understand that. Please start again by sending your registration number."
-      );
-      userSessions[accountSid].state = "awaiting_registration"; // Reset state
-
-      // Log unrecognized input
-      logger.warn(
-        `Unrecognized input from AccountSid ${accountSid}. Resetting session.`
+      // Notify the user of the failure
+      sendTwilioMessage(
+        fromNumber,
+        "❌ An error occurred while processing your payment. Please try again."
       );
     }
+  }, 2000); // Simulate a delay to mimic payment processing
 
-    res.type("text/xml").send(response.toString());
+  return {
+    status: "success",
+    message: "Payment processing initiated.",
+  };
+}
+const handlePaymentDone = async (accountSid) => {
+  try {
+    // Step 1: Fetch user data from the database using the accountSid (simulate with a mock function)
+    // const user = await getUserData(accountSid); // Function that retrieves user data based on accountSid
+
+    const user = userSessions[accountSid]?.user_info;
+
+    if (!user) {
+      throw new Error('User not found');
+    }
+
+    // Step 2: Format the message with the user's results
+    const message = formatUserResultsMessage(user);
+
+    // Step 3: Send the message using Twilio
+    await sendTwilioMessage(userSessions[accountSid].wa_info?.From, message); // You might want to replace email with phone number if that's required by Twilio
+
+    logger.info(`Message sent to ${user.email} successfully.`);
   } catch (error) {
-    console.error("Error processing message:", error);
-
-    // Log error
-    logger.error(
-      `Error processing message from AccountSid ${accountSid}: ${error.message}`
-    );
-
-    res.type("text/xml").send(response.toString());
+    logger.error('Error in handlePaymentDone', { error: error.message });
   }
 };
+const formatUserResultsMessage = (user) => {
+  let message = `Hello ${user.name},\n\nHere are your test results:\n\n`;
+
+  user.results.forEach((result, index) => {
+    message += `Test ${index + 1}: ${result.food} - ${result.testType}\n`;
+    for (const [key, value] of Object.entries(result.result)) {
+      message += `${key}: ${value}\n`;
+    }
+    message += "\n";
+  });
+
+  message += `Status: ${user.status}\n\nThank you for using our service!`;
+  return message;
+};
+// export const handleIncomingMessage1 = async (req, res) => {
+//   const { AccountSid: accountSid, From: fromNumber, Body: body } = req.body;
+
+//   const response = new twiml.MessagingResponse();
+
+//   try {
+//     logger.info(
+//       `Received message from ${fromNumber} (AccountSid: ${accountSid}): ${body.trim()}`
+//     );
+
+//     if (!userSessions[accountSid]) {
+//       handleNewSession(accountSid, response);
+//       response.message(MessageTemplates.WELCOME(req?.body?.ProfileName));
+//     } else if (userSessions[accountSid].state === "awaiting_registration") {
+//       const regNumber = body.trim();
+//       userSessions[accountSid].registration_number = regNumber;
+
+//       const [isValid, userInfo] = checkRegistrationNumber(regNumber);
+//       if (isValid) {
+//         userSessions[accountSid].state = "processing_payment";
+//         userSessions[accountSid].user_info = userInfo;
+
+//         response.message(MessageTemplates.PAYMENT_PROCESSING(userInfo.name));
+//         logger.info(
+//           `Registration number ${regNumber} found for ${userInfo.name}. Proceeding to payment.`
+//         );
+//         setTimeout(async () => {
+//           const moneyres = await initiateSTKPushRequest({
+//             phone: cleanPhoneNumber(fromNumber),
+//             amount: 1000,
+//           });
+//           if (moneyres?.ResponseCode === "0") {
+//             userSessions[accountSid].mpesa_id = moneyres?.MerchantRequestID;
+//             userSessions[accountSid].checkout_id = moneyres?.CheckoutRequestID;
+//             sendTwilioMessage(fromNumber, `✅ ${moneyres.ResponseDescription}`);
+//           }
+//         }, 1000);
+//       } else {
+//         response.message(
+//           `❌ Registration number ${regNumber} not found. Please check and try again.`
+//         );
+//         userSessions[accountSid].state = "awaiting_registration";
+
+//         logger.warn(
+//           `Invalid registration number ${regNumber} for AccountSid ${accountSid}.`
+//         );
+//       }
+//     } else if (userSessions[accountSid].state === "payment_done") {
+//       userSessions[accountSid].password = body.trim();
+//       userSessions[accountSid].state = "completed";
+
+//       const userInfo = userSessions[accountSid].user_info || {};
+//       response.message(
+//         `✅ Payment successful! Thank you, ${userInfo.name}.\nHere are your details:\n` +
+//           `- Name: ${userInfo.name}\n- Email: ${userInfo.email}\n- Phone: ${userInfo.phone}\n- Membership Level: ${userInfo.membership_level}`
+//       );
+
+//       logger.info(
+//         `Payment successful for AccountSid ${accountSid}. Transaction complete.`
+//       );
+
+//       delete userSessions[accountSid];
+//     } else {
+//       response.message(
+//         "❓ I'm sorry, I didn't understand that. Please start again by sending your registration number."
+//       );
+//       userSessions[accountSid].state = "awaiting_registration"; // Reset state
+
+//       // Log unrecognized input
+//       logger.warn(
+//         `Unrecognized input from AccountSid ${accountSid}. Resetting session.`
+//       );
+//     }
+
+//     res.type("text/xml").send(response.toString());
+//   } catch (error) {
+//     console.error("Error processing message:", error);
+
+//     // Log error
+//     logger.error(
+//       `Error processing message from AccountSid ${accountSid}: ${error.message}`
+//     );
+
+//     res.type("text/xml").send(response.toString());
+//   }
+// };
 
 function handleMessageProcessingError(fromNumber, error, res) {
   console.error("Error processing message:", error);
-  
-  logger.error(
-    `Error processing message from ${fromNumber}: ${error.message}`
-  );
-  
+
+  logger.error(`Error processing message from ${fromNumber}: ${error.message}`);
+
   const twimlResponse = new twiml.MessagingResponse();
   res.type("text/xml").send(twimlResponse.toString());
 }
 
 export const handleStatus = async (req, res) => {
   const statusData = req.body;
-  // console.log(statusData);
 
   try {
     // Log the received status data
@@ -219,7 +346,7 @@ export const handleStatus = async (req, res) => {
     }
 
     // res.status(200).send("Status update received");
-    // console.log(res.body)
+    // console.log("res status body", req.body);
   } catch (error) {
     logger.error("Error processing Twilio status update", { error });
     // res.status(500).send("Internal Server Error");
