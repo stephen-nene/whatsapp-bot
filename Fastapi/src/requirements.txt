@@ -1,8 +1,0 @@
-fastapi
-uvicorn
-twilio
-aiofiles
-python-dotenv
-httpx
-python-multipart
-pyngrok
