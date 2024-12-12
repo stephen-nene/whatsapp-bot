@@ -1,3 +1,4 @@
+// homecontroller.js
 import logger from '../utils/logger.js';
 // List of Ruby on Rails jokes
 const jokes = [
