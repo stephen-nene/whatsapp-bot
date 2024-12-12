@@ -10,6 +10,7 @@ const jokes = [
   ];
 
 export const getWelcomeMessage = (req, res) => {
+  console.log("fetched")
   const randomJoke = jokes[Math.floor(Math.random() * jokes.length)];
   logger.info(`GET / - Responding with joke: ${randomJoke}`);
   res.json({
