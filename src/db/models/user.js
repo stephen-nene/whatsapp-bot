@@ -10,8 +10,8 @@ export default (sequelize, DataTypes) => {
      */
     static associate(models) {
       // Define associations here
-      // User.hasMany(models.TestResult, { foreignKey: 'user_id' });
-      // User.hasMany(models.Session, { foreignKey: 'user_id', as: "Sessions"});
+      User.hasMany(models.TestResult, { foreignKey: 'user_id' });
+      User.hasMany(models.Session, { foreignKey: 'user_id', as: "Sessions"});
     }
   }
 
