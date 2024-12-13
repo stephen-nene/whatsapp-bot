@@ -1,16 +1,16 @@
-import db from "../db/models/index.js";
+import db from "../../models/index.js";
 
 export const getDatabaseController = {
   // Get all users
   async getAllUsers(req, res) {
     try {
       const users = await db.User.findAll({
-        include: [
-            {
-                model: db.TestResult,
-                as: 'TestResults'
-            }
-        ]
+        // include: [
+        //     {
+        //         model: db.TestResult,
+        //         as: 'TestResults'
+        //     }
+        // ]
       });
 
     console.log("Total users in database:", users.length);

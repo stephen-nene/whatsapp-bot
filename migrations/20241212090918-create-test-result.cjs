@@ -2,7 +2,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Sessions', {
+    await queryInterface.createTable('TestResults', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -19,15 +19,33 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
       },
-      session_state: {
+      food: {
         type: Sequelize.STRING
       },
-      created_at: {
+      status: {
+        type: Sequelize.STRING
+      },
+      test_type: {
+        type: Sequelize.STRING
+      },
+      submission_date: {
+        type: Sequelize.DATE
+      },
+      completion_date: {
+        type: Sequelize.DATE
+      },
+      sent_date: {
+        type: Sequelize.DATE
+      },
+      result_details: {
+        type: Sequelize.TEXT
+      },
+      createdAt: {
         type: Sequelize.DATE,
         allowNull: false,
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
       },
-      updated_at: {
+      updatedAt: {
         type: Sequelize.DATE,
         allowNull: false,
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
@@ -35,6 +53,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Sessions');
+    await queryInterface.dropTable('TestResults');
   }
 };

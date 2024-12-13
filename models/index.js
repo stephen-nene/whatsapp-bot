@@ -13,9 +13,10 @@ const env = process.env.NODE_ENV || 'development';
 const configPath = path.resolve(__dirname, '../config/config.json');
 const configFile = JSON.parse(fs.readFileSync(configPath, 'utf8'));
 const config = configFile[env];
+// console.log("Database storage path:", config.storage);
 
 const db = {};
-
+// console.log("config",config)
 let sequelize;
 if (config.use_env_variable) {
   sequelize = new Sequelize(process.env[config.use_env_variable], config);

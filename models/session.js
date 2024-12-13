@@ -15,7 +15,9 @@ export default (sequelize, DataTypes) => {
   }
   Session.init({
     user_id: DataTypes.INTEGER,
-    session_state: DataTypes.STRING
+    session_state: DataTypes.STRING,
+    createdAt: DataTypes.DATE,
+    updatedAt: DataTypes.DATE,
   }, {
     sequelize,
     modelName: 'Session',

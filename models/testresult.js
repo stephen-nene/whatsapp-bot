@@ -21,7 +21,9 @@ export default (sequelize, DataTypes) => {
     submission_date: DataTypes.DATE,
     completion_date: DataTypes.DATE,
     sent_date: DataTypes.DATE,
-    result_details: DataTypes.TEXT
+    result_details: DataTypes.TEXT,
+    createdAt: DataTypes.DATE,
+    updatedAt: DataTypes.DATE,
   }, {
     sequelize,
     modelName: 'TestResult',

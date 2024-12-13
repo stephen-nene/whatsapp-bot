@@ -23,11 +23,11 @@ router.post('/mpesa/callback', handleCallback);
 router.get('/users', getDatabaseController.getAllUsers);
 router.get('/users/:id', getDatabaseController.getUserById);
 
-// Test Results
+// // Test Results
 router.get('/results', getDatabaseController.getAllTestResults);
 router.get('/users/:userId/results', getDatabaseController.getTestResultsByUser);
 
-// Sessions
+// // Sessions
 router.get('/sessions', getDatabaseController.getAllSessions);
 router.get('/users/:userId/sessions', getDatabaseController.getSessionsByUser);
 
