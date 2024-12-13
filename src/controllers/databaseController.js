@@ -56,12 +56,12 @@ export const getDatabaseController = {
   async getAllTestResults(req, res) {
     try {
       const results = await db.TestResult.findAll({
-        include: [
-          {
-            model: db.User,
-            attributes: ["id", "name", "email"],
-          },
-        ],
+        // include: [
+        //   {
+        //     model: db.User,
+        //     attributes: ["id", "full_name", "email"],
+        //   },
+        // ],
       });
       res.json(results);
     } catch (error) {
