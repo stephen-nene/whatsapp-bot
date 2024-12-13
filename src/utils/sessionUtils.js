@@ -40,10 +40,10 @@ const registeredUsers = [
     id: "1234a",
     name: "steve",
     email: "stevenene@gmail.com",
-    status: "Failed",
     results: [
       {
         food: "Tomato Sauce",
+        status: "Failed",
         testType: "Microbial Analysis",
         submissionDate: "2024-11-15",
         completionDate: "2024-11-18",
@@ -60,13 +60,13 @@ const registeredUsers = [
     id: "1234b",
     name: "john",
     email: "johnsmith@example.com",
-    status: "Passed",
     results: [
       {
         food: "Whole Wheat Bread",
         testType: "Nutritional Analysis",
         submissionDate: "2024-11-10",
         completionDate: "2024-11-13",
+        status: "Passed",
         sentDate: "2024-11-14",
         result: {
           protein: "12g/100g",
@@ -78,6 +78,7 @@ const registeredUsers = [
         food: "Peanut Butter",
         testType: "Allergen Test",
         submissionDate: "2024-11-20",
+        status: "Passed",
         completionDate: "2024-11-22",
         sentDate: "2024-11-23",
         result: {
@@ -91,7 +92,6 @@ const registeredUsers = [
     id: "1234c",
     name: "jane",
     email: "janedoe@example.com",
-    status: "Failed",
     results: [
       {
         food: "Fresh Milk",

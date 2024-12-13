@@ -11,6 +11,8 @@ import apiRoutes from './routes/routes.js';
 
 const app = express();
 
+
+
 // Middleware
 app.use(cors());
 app.use(express.json());
@@ -32,6 +34,7 @@ app.use((err, req, res, next) => {
   logger.error(`${req.method} ${req.url} - ${err.message}`);
   res.status(500).json({ error: 'An internal server error occurred' });
 });
+
 
 // Start server
 const PORT = process.env.PORT || 3000;
