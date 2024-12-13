@@ -1,26 +1,58 @@
 'use strict';
 import { Model } from 'sequelize';
+
 export default (sequelize, DataTypes) => {
   class Session extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
-      // define association here
+      // Association with User model
       Session.belongsTo(models.User, { foreignKey: 'user_id' });
-
     }
   }
-  Session.init({
-    user_id: DataTypes.INTEGER,
-    session_state: DataTypes.STRING,
-    createdAt: DataTypes.DATE,
-    updatedAt: DataTypes.DATE,
-  }, {
-    sequelize,
-    modelName: 'Session',
-  });
+
+  Session.init(
+    {
+      user_id: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+        references: {
+          model: 'Users',
+          key: 'id',
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'SET NULL',
+      },
+      session_state: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      AccountSid: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      ProfileName: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      WaId: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      createdAt: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
+      },
+      updatedAt: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
+      },
+    },
+    {
+      sequelize,
+      modelName: 'Session',
+    }
+  );
+
   return Session;
 };
