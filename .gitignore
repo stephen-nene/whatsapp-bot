@@ -1,5 +1,15 @@
+dist/*
 node_modules
 .env
+
+*_sessions
+*tokens
+.wwebjs*
+
+*.log
+*qr.png
+
+
 # express/src/logs/combined.log
 # express/src/logs/*
 logs
@@ -7,3 +17,5 @@ logs
 package-lock.json
 
 config.json
+
+db.json
