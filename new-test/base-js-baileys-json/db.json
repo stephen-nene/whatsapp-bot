@@ -1,0 +1,25 @@
+[
+  {
+    "ref": "0963ee30-16da-403a-b24e-f65b8b9d5f12",
+    "keyword": "94dbdd83401afa63284b9ef8dc775a76",
+    "answer": "Samples",
+    "options": {},
+    "from": "254741780970",
+    "refSerialize": "704c2c1792d698e3777fcce26d4b7a85"
+  },
+  {
+    "ref": "ans_3301ccb9-0b2e-4881-bf95-54fd1c7ce19b",
+    "keyword": "key_44216597-9857-4cfd-b555-43c70b9c986a",
+    "answer": "💪 I'll send you a lot of files...",
+    "options": {
+      "buttons": [],
+      "capture": false,
+      "delay": 0,
+      "nested": [],
+      "keyword": {},
+      "callback": false
+    },
+    "refSerialize": "01ca22c93a65493e5abf86cca43e030f",
+    "from": "254741780970"
+  }
+]

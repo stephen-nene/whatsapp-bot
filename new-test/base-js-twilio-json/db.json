@@ -1,0 +1,121 @@
+[
+  {
+    "ref": "7dc2d0e5-888a-40c9-9bab-5f0cac827570",
+    "keyword": "5ab6937d2ab9dc36e60079b986e1106d",
+    "answer": "Samples",
+    "options": {},
+    "from": "+254741780970",
+    "refSerialize": "704c2c1792d698e3777fcce26d4b7a85"
+  },
+  {
+    "ref": "ans_43d06406-a5bf-474a-ad09-2c137090444a",
+    "keyword": "key_c35a69c2-5c8e-4da6-a2d7-2eebe24f37a6",
+    "answer": "💪 I'll send you a lot files...",
+    "options": {
+      "buttons": [],
+      "capture": false,
+      "delay": 0,
+      "nested": [],
+      "keyword": {},
+      "callback": false
+    },
+    "refSerialize": "128ec61a4863b7c856e289b199fc982c",
+    "from": "+254741780970"
+  },
+  {
+    "ref": "ans_13d4c09e-304c-4cea-a8b6-930386d7fa63",
+    "keyword": "ans_43d06406-a5bf-474a-ad09-2c137090444a",
+    "answer": "Send video from URL",
+    "options": {
+      "media": "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYTJ0ZGdjd2syeXAwMjQ4aWdkcW04OWlqcXI3Ynh1ODkwZ25zZWZ1dCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/LCohAb657pSdHv0Q5h/giphy.mp4",
+      "buttons": [],
+      "capture": false,
+      "delay": 0,
+      "nested": [],
+      "keyword": {},
+      "callback": false
+    },
+    "refSerialize": "c4bd348eea174f0a4cfdc30032e96941",
+    "from": "+254741780970"
+  },
+  {
+    "ref": "ans_a443bb2b-f2c6-4b0c-93c7-b0147732a012",
+    "keyword": "ans_13d4c09e-304c-4cea-a8b6-930386d7fa63",
+    "answer": "__capture_only_intended__",
+    "options": {
+      "media": "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYTJ0ZGdjd2syeXAwMjQ4aWdkcW04OWlqcXI3Ynh1ODkwZ25zZWZ1dCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/LCohAb657pSdHv0Q5h/giphy.mp4",
+      "buttons": [],
+      "capture": false,
+      "delay": 0,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "485e98d6f6355ece63d8b15ffa9639fe",
+    "from": "+254741780970"
+  },
+  {
+    "ref": "ans_054b43ac-f3a4-4c2c-8cb9-284d3bd0da04",
+    "keyword": "ans_a443bb2b-f2c6-4b0c-93c7-b0147732a012",
+    "answer": "Send audio from URL",
+    "options": {
+      "media": "https://cdn.freesound.org/previews/728/728142_11861866-lq.mp3",
+      "buttons": [],
+      "capture": false,
+      "delay": 0,
+      "nested": [],
+      "keyword": {},
+      "callback": false
+    },
+    "refSerialize": "a5bd9de0cad2d009f04511a0eb089c09",
+    "from": "+254741780970"
+  },
+  {
+    "ref": "ans_a0feb652-72e3-41ca-b901-c96b2a5110f3",
+    "keyword": "ans_054b43ac-f3a4-4c2c-8cb9-284d3bd0da04",
+    "answer": "__capture_only_intended__",
+    "options": {
+      "media": "https://cdn.freesound.org/previews/728/728142_11861866-lq.mp3",
+      "buttons": [],
+      "capture": false,
+      "delay": 0,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "232dd81a6b9861db0a58b0faeda59835",
+    "from": "+254741780970"
+  },
+  {
+    "ref": "ans_97461607-c2fb-4054-87e8-577a4e1e7128",
+    "keyword": "ans_a0feb652-72e3-41ca-b901-c96b2a5110f3",
+    "answer": "Send file from URL",
+    "options": {
+      "media": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
+      "buttons": [],
+      "capture": false,
+      "delay": 0,
+      "nested": [],
+      "keyword": {},
+      "callback": false
+    },
+    "refSerialize": "d6360100ebdd3719d3dbf00fe37de7e1",
+    "from": "+254741780970"
+  },
+  {
+    "ref": "ans_1ca98888-153a-494c-9181-efb90451fa8b",
+    "keyword": "ans_97461607-c2fb-4054-87e8-577a4e1e7128",
+    "answer": "__capture_only_intended__",
+    "options": {
+      "media": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
+      "buttons": [],
+      "capture": false,
+      "delay": 0,
+      "nested": [],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "685ebb1c032ef7974541d41aabdd2304",
+    "from": "+254741780970"
+  }
+]
