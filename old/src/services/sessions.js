@@ -1,5 +1,5 @@
 import db from "../../models/index.js";
-import { Op } from 'sequelize';
+import { Op } from "sequelize";
 
 class SessionManager {
   constructor() {
@@ -21,9 +21,9 @@ class SessionManager {
       include: options.include || [
         {
           model: db.TestResult,
-          as: 'TestResults'
-        }
-      ]
+          as: "TestResults",
+        },
+      ],
     });
   }
 
@@ -41,8 +41,8 @@ class SessionManager {
         {
           model: db.User,
           attributes: ["id", "full_name", "email"],
-        }
-      ]
+        },
+      ],
     });
   }
 
@@ -52,24 +52,24 @@ class SessionManager {
    * @param {string} initialState - Initial session state
    * @returns {Promise<Session>} Created or found session
    */
-  async initializeSession(userData, initialState = 'AWAITING_REGISTRATION') {
+  async initializeSession(userData, initialState = "AWAITING_REGISTRATION") {
     try {
       // Find or create user based on registration number
       const [user, created] = await this.User.findOrCreate({
         where: { registration_number: userData.registration_number },
-        defaults: userData
+        defaults: userData,
       });
 
       // Create a new session
       const session = await this.Session.create({
         user_id: user.id,
-        session_state: initialState
+        session_state: initialState,
       });
 
       return session;
     } catch (error) {
-      console.error('Session initialization failed:', error);
-      throw new Error('Failed to initialize session');
+      console.error("Session initialization failed:", error);
+      throw new Error("Failed to initialize session");
     }
   }
 
@@ -83,23 +83,23 @@ class SessionManager {
     try {
       const [updatedRowsCount, [updatedSession]] = await this.Session.update(
         { session_state: newState },
-        { 
-          where: { 
+        {
+          where: {
             user_id: userId,
-            session_state: { [Op.ne]: newState } 
+            session_state: { [Op.ne]: newState },
           },
-          returning: true 
+          returning: true,
         }
       );
 
       if (updatedRowsCount === 0) {
-        throw new Error('No session updated');
+        throw new Error("No session updated");
       }
 
       return updatedSession;
     } catch (error) {
-      console.error('Session state update failed:', error);
-      throw new Error('Failed to update session state');
+      console.error("Session state update failed:", error);
+      throw new Error("Failed to update session state");
     }
   }
 
@@ -110,10 +110,10 @@ class SessionManager {
    */
   async getCurrentSession(userId) {
     return await this.Session.findOne({
-      where: { 
-        user_id: userId 
+      where: {
+        user_id: userId,
       },
-      order: [['createdAt', 'DESC']]
+      order: [["createdAt", "DESC"]],
     });
   }
 
@@ -128,9 +128,9 @@ class SessionManager {
     await this.Session.destroy({
       where: {
         createdAt: {
-          [Op.lt]: expirationDate
-        }
-      }
+          [Op.lt]: expirationDate,
+        },
+      },
     });
   }
 
@@ -140,25 +140,20 @@ class SessionManager {
    * @returns {Promise<Array>} Matching users
    */
   async searchUsers(searchCriteria) {
-    const { 
-      name, 
-      email, 
-      registrationNumber, 
-      minTestScore, 
-      membershipLevel 
-    } = searchCriteria;
+    const { name, email, registrationNumber, minTestScore, membershipLevel } =
+      searchCriteria;
 
     const whereConditions = {};
 
     if (name) {
       whereConditions.full_name = {
-        [Op.like]: `%${name}%`
+        [Op.like]: `%${name}%`,
       };
     }
 
     if (email) {
       whereConditions.email = {
-        [Op.like]: `%${email}%`
+        [Op.like]: `%${email}%`,
       };
     }
 
@@ -171,24 +166,26 @@ class SessionManager {
       include: [
         {
           model: db.TestResult,
-          where: minTestScore ? {
-            score: {
-              [Op.gte]: minTestScore
-            }
-          } : {},
-          required: !!minTestScore
-        }
-      ]
+          where: minTestScore
+            ? {
+                score: {
+                  [Op.gte]: minTestScore,
+                },
+              }
+            : {},
+          required: !!minTestScore,
+        },
+      ],
     });
   }
 }
 
 // Predefined session states
 SessionManager.STATES = {
-  AWAITING_REGISTRATION: 'AWAITING_REGISTRATION',
-  PROCESSING_PAYMENT: 'PROCESSING_PAYMENT',
-  PAYMENT_DONE: 'PAYMENT_DONE',
-  REGISTRATION_FAILED: 'REGISTRATION_FAILED'
+  AWAITING_REGISTRATION: "AWAITING_REGISTRATION",
+  PROCESSING_PAYMENT: "PROCESSING_PAYMENT",
+  PAYMENT_DONE: "PAYMENT_DONE",
+  REGISTRATION_FAILED: "REGISTRATION_FAILED",
 };
 
 export default SessionManager;

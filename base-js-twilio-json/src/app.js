@@ -1,7 +1,9 @@
 import { join } from 'path'
 import { createBot, createProvider, createFlow, addKeyword, utils } from '@builderbot/bot'
 import { JsonFileDB as Database } from '@builderbot/database-json'
-import { BaileysProvider as Provider } from '@builderbot/provider-baileys'
+import { TwilioProvider as Provider } from '@builderbot/provider-twilio'
+import dotenv from "dotenv";
+dotenv.config();
 
 const PORT = process.env.PORT ?? 3008
 
@@ -47,36 +49,27 @@ const registerFlow = addKeyword(utils.setEvent('REGISTER_FLOW'))
         await flowDynamic(`${state.get('name')}, thanks for your information!: Your age: ${state.get('age')}`)
     })
 
-const fullSamplesFlow = addKeyword(["samples", utils.setEvent("SAMPLES")])
-  .addAnswer(`💪 I'll send you a lot of files...`)
+const fullSamplesFlow = addKeyword(['samples', utils.setEvent('SAMPLES')])
+    .addAnswer(`💪 I'll send you a lot files...`)
+    .addAnswer(`Send image from Local`, { media: join(process.cwd(), 'assets', 'sample.png') })
+    .addAnswer(`Send video from URL`, {
+        media: 'https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYTJ0ZGdjd2syeXAwMjQ4aWdkcW04OWlqcXI3Ynh1ODkwZ25zZWZ1dCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/LCohAb657pSdHv0Q5h/giphy.mp4',
+    })
+    .addAnswer(`Send audio from URL`, { media: 'https://cdn.freesound.org/previews/728/728142_11861866-lq.mp3' })
+    .addAnswer(`Send file from URL`, {
+        media: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
+    })
+const SID = process.env.TWILIO_ACCOUNT_SID;
 
-  // Sending a local image from the 'assets' folder
-  .addAnswer(`Send image from Local`, {
-    media: join(process.cwd(), "assets", "sample.png"),
-  })
-
-  // Sending a video from URL
-  .addAnswer(`Send video from URL`, {
-    media:
-      "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYTJ0ZGdjd2syeXAwMjQ4aWdkcW04OWlqcXI3Ynh1ODkwZ25zZWZ1dCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/LCohAb657pSdHv0Q5h/giphy.mp4",
-  })
-
-  // Sending an audio file from URL
-  .addAnswer(`Send audio from URL`, {
-    media: "https://cdn.freesound.org/previews/728/728142_11861866-lq.mp3",
-  })
-
-  // Sending a PDF file from URL
-  .addAnswer(`Send file from URL`, {
-    media:
-      "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
-  });
-
+console.log(`SID: ${SID}`);
 
 const main = async () => {
     const adapterFlow = createFlow([welcomeFlow, registerFlow, fullSamplesFlow])
-    
-    const adapterProvider = createProvider(Provider)
+    const adapterProvider = createProvider(Provider, {
+      accountSid: process.env.TWILIO_ACCOUNT_SID,
+      authToken: process.env.TWILIO_AUTH_TOKEN,
+      vendorNumber: process.env.TWILIO_WHATSAPP_NUMBER,
+    });
     
     const adapterDB = new Database({ filename: 'db.json' })
 

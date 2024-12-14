@@ -13,7 +13,7 @@ export const getDatabaseController = {
         // ]
       });
 
-    console.log("Total users in database:", users.length);
+      console.log("Total users in database:", users.length);
       res.json(users);
     } catch (error) {
       console.error("Error fetching users:", error);

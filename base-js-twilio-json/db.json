@@ -1,0 +1,71 @@
+[
+  {
+    "ref": "ans_cf1315c9-1a7e-4195-b87e-28b933ef253c",
+    "keyword": "key_11f17ea6-d8a6-4d9a-8cf8-1210ac7ae0d5",
+    "answer": "🙌 Hello welcome to this *Chatbot*",
+    "options": {
+      "buttons": [],
+      "capture": false,
+      "delay": 0,
+      "nested": [],
+      "keyword": {},
+      "callback": false
+    },
+    "refSerialize": "93ded315bf64e5b0f70ed15acc1d8227",
+    "from": "+254741780970"
+  },
+  {
+    "ref": "ans_7ea25362-4154-417a-845a-dde3015d638e",
+    "keyword": "ans_cf1315c9-1a7e-4195-b87e-28b933ef253c",
+    "answer": "I share with you the following links of interest about the project\n👉 *doc* to view the documentation",
+    "options": {
+      "buttons": [],
+      "capture": false,
+      "delay": 800,
+      "nested": [],
+      "keyword": {},
+      "callback": false
+    },
+    "refSerialize": "bb8be9b25070a5914d45ddff1afaf581",
+    "from": "+254741780970"
+  },
+  {
+    "ref": "ans_2089dea3-515e-43eb-b8b5-82afbb3e51a4",
+    "keyword": "ans_7ea25362-4154-417a-845a-dde3015d638e",
+    "answer": "__capture_only_intended__",
+    "options": {
+      "buttons": [],
+      "capture": true,
+      "delay": 800,
+      "nested": [
+        {
+          "ref": "key_2c09b7e4-6d77-42c9-a654-887ddad8936f",
+          "keyword": "doc",
+          "options": {
+            "sensitive": false,
+            "regex": false
+          },
+          "refSerialize": "5a8225144cb89933cbe2a9a3d251d9a2"
+        },
+        {
+          "ref": "ans_386a7a76-21b3-45d3-9b53-412fda1179e7",
+          "keyword": "key_2c09b7e4-6d77-42c9-a654-887ddad8936f",
+          "answer": "You can see the documentation here\n📄 https://builderbot.app/docs \n\nDo you want to continue? *yes*",
+          "options": {
+            "buttons": [],
+            "capture": true,
+            "delay": 0,
+            "nested": [],
+            "keyword": {},
+            "callback": true
+          },
+          "refSerialize": "482d8284f7cafe38eaa23c1d5cb2dbc3"
+        }
+      ],
+      "keyword": {},
+      "callback": true
+    },
+    "refSerialize": "1b7bd4bc6d27adaf696d7d688bac3074",
+    "from": "+254741780970"
+  }
+]

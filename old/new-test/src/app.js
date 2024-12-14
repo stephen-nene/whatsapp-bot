@@ -2,8 +2,13 @@ import { join } from 'path'
 import { createBot, createProvider, createFlow, addKeyword, utils } from '@builderbot/bot'
 import { JsonFileDB as Database } from '@builderbot/database-json'
 import { TwilioProvider as Provider } from '@builderbot/provider-twilio'
+import dotenv from "dotenv";
+dotenv.config();
 
 const PORT = process.env.PORT ?? 3008
+const SID = process.env.TWILIO_ACCOUNT_SID;
+
+console.log(`SID: ${SID}`);
 
 const discordFlow = addKeyword('doc').addAnswer(
     ['You can see the documentation here', '📄 https://builderbot.app/docs \n', 'Do you want to continue? *yes*'].join(
@@ -18,6 +23,37 @@ const discordFlow = addKeyword('doc').addAnswer(
         return
     }
 )
+const TEMPLATE_SID = "HXb5b62575e6e4ff6129ad7c8efe1f983e"; // Correct SID of the template
+
+const fallbackFlow = addKeyword("").addAnswer(async (ctx) => {
+  const date = "12/1"; // Example date
+  const time = "3pm"; // Example time
+
+  try {
+    // Send the template message with content SID
+    await ctx.sendText("", {
+      contentSid: TEMPLATE_SID, // The SID of the approved Twilio template
+      contentVariables: {
+        1: date, // Replace {{1}} in the template with the date
+        2: time, // Replace {{2}} in the template with the time
+      },
+    });
+  } catch (error) {
+    console.error("Error sending template message:", error);
+    await ctx.sendText(
+      "Sorry, there was an issue with sending your message. Please try again later."
+    );
+  }
+});
+
+
+
+
+//     addAnswer(
+//   "Content template SID\nHX16ae66098d8c0505c394047c50e188cf",
+//   { contentSid: "HX16ae66098d8c0505c394047c50e188cf" }
+// );
+
 
 const welcomeFlow = addKeyword(['hi', 'hello', 'hola'])
     .addAnswer(`🙌 Hello welcome to this *Chatbot*`)
@@ -29,6 +65,8 @@ const welcomeFlow = addKeyword(['hi', 'hello', 'hola'])
         { delay: 800, capture: true },
         async (ctx, { fallBack }) => {
             if (!ctx.body.toLocaleLowerCase().includes('doc')) {
+                console.log(`CTX: ${JSON.stringify(ctx, null, 2)}`);
+
                 return fallBack('You should type *doc*')
             }
             return
@@ -38,9 +76,13 @@ const welcomeFlow = addKeyword(['hi', 'hello', 'hola'])
 
 const registerFlow = addKeyword(utils.setEvent('REGISTER_FLOW'))
     .addAnswer(`What is your name?`, { capture: true }, async (ctx, { state }) => {
+console.log(`CTX: ${JSON.stringify(ctx, null, 2)}`);
+
+
         await state.update({ name: ctx.body })
     })
     .addAnswer('What is your age?', { capture: true }, async (ctx, { state }) => {
+        console.log(ctx)
         await state.update({ age: ctx.body })
     })
     .addAction(async (_, { flowDynamic, state }) => {
@@ -60,12 +102,13 @@ const fullSamplesFlow = addKeyword(['samples', utils.setEvent('SAMPLES')])
 
 
 const main = async () => {
-    const adapterFlow = createFlow([welcomeFlow, registerFlow, fullSamplesFlow])
+    const adapterFlow = createFlow([welcomeFlow, registerFlow, fullSamplesFlow,fallbackFlow])
     const adapterProvider = createProvider(Provider, {
-      accountSid: "ACb4bc479609f6ea4b1418f4cc0a3719d6",
-      authToken: "18f73fb873877ba344091a695c804711",
-      vendorNumber: "whatsapp:+14155238886",
+      accountSid: SID,
+      authToken: process.env.TWILIO_AUTH_TOKEN,
+      vendorNumber: process.env.TWILIO_WHATSAPP_NUMBER,
     });
+    // 323aca09dc4f8a2619e8a59702602187
     
     const adapterDB = new Database({ filename: 'db.json' })
 
