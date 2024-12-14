@@ -16,7 +16,8 @@ import {
 
 export const handleIncomingMessage = async (req, res) => {
   const { AccountSid: accountSid, From: fromNumber, Body: body } = req.body;
-  // console.log("All sessions:", userSessions);
+  console.log("All sessions:", userSessions);
+  console.log("All sessions:", req.body);
 
   try {
     logger.info(`Received message from ${fromNumber}: ${body.trim()}`);
