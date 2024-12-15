@@ -1,5 +1,5 @@
 import { addKeyword, EVENTS } from "@builderbot/bot";
-import { welcomeFlow } from "./welcome.flow.js";
+import { welcomeFlow } from "../welcome.flow.js";
 
 const goodConductDummyData = {
   GC12345: {

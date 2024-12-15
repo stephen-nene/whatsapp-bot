@@ -1,5 +1,5 @@
 import { addKeyword, EVENTS } from "@builderbot/bot";
-import { welcomeFlow } from "./welcome.flow.js";
+import { welcomeFlow } from "../welcome.flow.js";
 
 const drivingLicenseDummyData = {
   DL12345: { name: "Samuel Kariuki", status: "Valid", expiry: "2025-09-30" },

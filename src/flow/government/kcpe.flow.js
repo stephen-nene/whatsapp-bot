@@ -1,9 +1,43 @@
 import { addKeyword, EVENTS } from "@builderbot/bot";
-import { welcomeFlow } from "./welcome.flow.js";
+import { welcomeFlow } from "../welcome.flow.js";
 
 const kcpeDummyData = {
-  KCPE12345: { name: "Alice Wanjiku", score: 423, status: "Pass" },
-  KCPE67890: { name: "Brian Otieno", score: 372, status: "Pass" },
+  KCPE12345: {
+    name: "Alice Wanjiku",
+    totalScore: 423,
+    status: "Pass",
+    subjects: {
+      English: 85,
+      Kiswahili: 90,
+      Mathematics: 88,
+      Science: 80,
+      SocialStudies: 80,
+    },
+  },
+  KCPE67890: {
+    name: "Brian Otieno",
+    totalScore: 372,
+    status: "Pass",
+    subjects: {
+      English: 75,
+      Kiswahili: 82,
+      Mathematics: 80,
+      Science: 65,
+      SocialStudies: 70,
+    },
+  },
+  KCPE11111: {
+    name: "Cynthia Mutiso",
+    totalScore: 289,
+    status: "Pass",
+    subjects: {
+      English: 60,
+      Kiswahili: 55,
+      Mathematics: 58,
+      Science: 58,
+      SocialStudies: 58,
+    },
+  },
 };
 
 // KCPE Checker Flow
@@ -29,8 +63,16 @@ export const kcpeCheckFlow = addKeyword(EVENTS.ACTION)
         // Show results
         await flowDynamic(`✅ *KCPE Results*:
 📛 Name: ${result.name}
-📋 Total Score: ${result.score}
-📊 Status: ${result.status}`);
+📋 Total Score: ${result.totalScore}
+📊 Status: ${result.status}
+
+📚 *Subject Breakdown:*
+- 📝 English: ${result.subjects.English}
+- 📝 Kiswahili: ${result.subjects.Kiswahili}
+- 🧮 Mathematics: ${result.subjects.Mathematics}
+- 🔬 Science: ${result.subjects.Science}
+- 🌍 Social Studies: ${result.subjects.SocialStudies}
+`);
 
         // Option to retry or exit
         await flowDynamic(

@@ -11,13 +11,17 @@
   },
   "keywords": [],
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.32.1",
     "@builderbot/bot": "1.2.2",
+    "@builderbot/database-json": "1.2.2",
     "@builderbot/provider-baileys": "1.2.2",
-    "@builderbot/database-json": "1.2.2"
+    "axios": "^1.7.9",
+    "dotenv": "^16.4.7",
+    "openai": "^4.76.3"
   },
   "devDependencies": {
-    "eslint-plugin-builderbot": "latest",
     "eslint": "^8.57.0",
+    "eslint-plugin-builderbot": "latest",
     "nodemon": "^3.1.0"
   },
   "author": "",
