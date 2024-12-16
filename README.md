@@ -31,6 +31,8 @@ npm create builderbot@latest
 ## Documentation
 
 Visit [builderbot](https://builderbot.vercel.app/) to view the full documentation.
+https://bot-whatsapp.netlify.app/
+https://www.builderbot.app/en/add-functions
 
 
 ## Official Course
