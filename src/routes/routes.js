@@ -4,6 +4,7 @@ import {
   handleCallback,
 } from "../controllers/mpesacontroller.js"; // Import the STK push function
 
+import { modelsController } from "../controllers/modelscontroller.js";
 export const registerRoutes = (provider, handleCtx) => {
   provider.server.post(
     "/v1/messages",
@@ -62,18 +63,58 @@ export const registerRoutes = (provider, handleCtx) => {
       }
     })
   );
-    provider.server.post(
-      "/v1/mpesa/callback",
-      handleCtx(async (bot, req, res) => {
-        try {
-          // Call the callback handler to process the callback
-          await handleCallback(req, res);
-        } catch (error) {
-          // Handle any errors
-          res.writeHead(500, { "Content-Type": "application/json" });
-          return res.end(JSON.stringify({ error: error.message }));
-        }
-      })
-    );
+  provider.server.post(
+    "/v1/mpesa/callback",
+    handleCtx(async (bot, req, res) => {
+      try {
+        // Call the callback handler to process the callback
+        await handleCallback(req, res);
+      } catch (error) {
+        // Handle any errors
+        res.writeHead(500, { "Content-Type": "application/json" });
+        return res.end(JSON.stringify({ error: error.message }));
+      }
+    })
+  );
 
+  // Get all AI models
+  provider.server.get(
+    "/v1/models",
+    handleCtx(async (bot, req, res) => {
+      await modelsController.getAllModels(req, res);
+    })
+  );
+
+  // Create a new AI model
+  provider.server.post(
+    "/v1/models",
+    handleCtx(async (bot, req, res) => {
+      await modelsController.createModel(req, res);
+    })
+  );
+
+  // Get a specific AI model by ID
+  provider.server.get(
+    "/v1/models/:id",
+    handleCtx(async (bot, req, res) => {
+      await modelsController.getModelById(req, res);
+    })
+  );
+
+  // Update an AI model
+  provider.server.put(
+    "/v1/models/:id",
+    handleCtx(async (bot, req, res) => {
+      await modelsController.updateModel(req, res);
+    })
+  );
+
+  // Delete an AI model
+  provider.server.delete(
+    "/v1/models/:id",
+    handleCtx(async (bot, req, res) => {
+      await modelsController.deleteModel(req, res);
+    })
+  );
+  
 };

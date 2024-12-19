@@ -11,6 +11,8 @@ import { grokTalkFlow } from "./Grok/grok.flow.js";
 
 import { payGrokFlow } from "./payment/payment.flow.js";
 
+import { neneFlow } from "./AI/nene.flow.js";
+
 export const flow = createFlow([
   welcomeFlow,
   kcpeCheckFlow,
@@ -19,5 +21,6 @@ export const flow = createFlow([
   drivingLicenseCheckFlow,
   grokTalkFlow,
   payGrokFlow,
+  neneFlow,
   // Add more flows here as needed...
 ]);

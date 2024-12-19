@@ -17,12 +17,16 @@
     "@builderbot/provider-baileys": "1.2.2",
     "axios": "^1.7.9",
     "dotenv": "^16.4.7",
-    "openai": "^4.76.3"
+    "openai": "^4.76.3",
+    "sequelize": "^6.37.5",
+    "sqlite3": "^5.1.7"
   },
   "devDependencies": {
     "eslint": "^8.57.0",
     "eslint-plugin-builderbot": "latest",
-    "nodemon": "^3.1.0"
+    "nodemon": "^3.1.0",
+    "sequelize-cli": "^6.6.2",
+    "@faker-js/faker": "^9.3.0"
   },
   "author": "",
   "license": "ISC",
